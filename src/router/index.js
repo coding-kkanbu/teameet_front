@@ -7,6 +7,7 @@ import Health from '@/components/Topic/Health.vue'
 import Invest from '@/components/Topic/Invest.vue'
 import Ssum from '@/components/Topic/Ssum.vue'
 import Travel from '@/components/Topic/Travel.vue'
+import PitAPat from '@/components/PitAPat.vue'
 import PostDetail from '@/components/PostDetail.vue'
 
 Vue.use(Router)
@@ -15,6 +16,7 @@ export default new Router({
   routes: [
     { path: '/', component: MainHome },
     { path: '/topic', component: Topic },
+    { path: '/pitapat', component: PitAPat },
     { path: '/topic/postdetail', component: PostDetail },
 
     {
