@@ -2,7 +2,7 @@
 <v-app id="inspire">
     <AppBar />
 
-    <v-container>
+    <v-container class="#E5E5E5">
       <v-row>
         <v-col class="col-12 col-md-10" offset-md="1">
 
