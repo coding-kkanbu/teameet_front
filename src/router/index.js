@@ -13,6 +13,7 @@ import PostDetail from '@/components/PostDetail.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { path: '/', component: MainHome },
     { path: '/topic', component: Topic },
