@@ -214,11 +214,6 @@ export default {
   font-size: 1em;
 }
 
-a {
-  text-decoration: none;
-  font-weight: bold;
-}
-
 #search-box input::placeholder {
   color: red !important;
   opacity: 1;
