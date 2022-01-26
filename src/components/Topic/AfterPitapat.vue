@@ -4,7 +4,7 @@
     <v-container>
       <v-row>
         <v-col v-for="post in PaginatedPosts" :key="post.id" cols="6">
-          <v-card outlined dense elevation="0" href="postdetail" height="186">
+          <v-card outlined dense elevation="0" href="#/topic/postdetail" height="186">
             <v-card-title class="font-weight-bold">{{
               post.title.substr(0, 25)
             }}</v-card-title>
