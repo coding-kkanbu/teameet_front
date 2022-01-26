@@ -1,8 +1,17 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+<v-app id="inspire">
+
+    <v-container>
+      <v-row>
+        <v-col class="col-12 col-md-10" offset-md="1">
+
+          <router-view/>
+
+        </v-col>
+      </v-row>
+    </v-container>
+
+  </v-app>
 </template>
 
 <script>
