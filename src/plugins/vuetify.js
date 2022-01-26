@@ -1,3 +1,4 @@
+import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -17,6 +18,9 @@ const opts = {
         warning: '#F29930'
       }
     }
+  },
+  icons: {
+    iconfont: 'mdi'
   }
 }
 
