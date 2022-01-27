@@ -1,30 +1,30 @@
 <template>
-  <v-container class="#E5E5E5">
+  <div>
     <!-- posts -->
     <v-container>
       <v-row>
-        <v-col v-for="post in PaginatedPosts" :key="post.id" cols="6">
-          <v-card outlined dense elevation="0" href="postdetail" height="186">
-            <v-card-title class="font-weight-bold">{{
-              post.title.substr(0, 25)
-            }}</v-card-title>
-            <v-card elevation="0" height="85">
-              <v-card-text
-                class="black--text"
-                v-text="post.content.substr(0, 100)"
-              ></v-card-text>
-            </v-card>
-            <v-card-actions class="ml-2">
-              <div style="color: #a6a6a6; font-size: 12px;">
-                <v-icon dense color="#A6A6A6"> mdi-eye </v-icon>
-                &nbsp;{{ post.hit }}&nbsp;
-                <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
-                {{ post.like }}&nbsp;&nbsp;
-                <v-icon dense color="#A6A6A6">
-                  mdi-message-processing-outline
-                </v-icon>
-                &nbsp;{{ post.comment }}&nbsp;
-              </div>
+        <v-col cols="6" v-for="post in PaginatedPosts" :key="post.id">
+          <v-card href="postdetail" tile outlined height="186">
+            <v-card-title class="font-weight-bold">
+              {{ post.title.substr(0, 25) }}
+            </v-card-title>
+            <v-card-text
+              class="black--text"
+              style="height: 85px"
+              v-text="post.content.substr(0, 100)"
+            ></v-card-text>
+            <v-card-actions
+              class="px-4"
+              style="color: #a6a6a6; font-size: 12px"
+            >
+              <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
+              {{ post.hit }}
+              <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
+              {{ post.like }}
+              <v-icon dense color="#A6A6A6">
+                mdi-message-processing-outline
+              </v-icon>
+              {{ post.comment }}
             </v-card-actions>
           </v-card>
         </v-col>
@@ -43,7 +43,7 @@
         ></v-pagination>
       </v-row>
     </v-container>
-  </v-container>
+  </div>
 </template>
 
 <script>

@@ -1,7 +1,12 @@
 <template>
   <div>
     <!-- AppBar -->
-    <v-app-bar app color="#FFFFFF">
+    <v-app-bar
+      app
+      color="#FFFFFF"
+      flat
+      style="border-bottom: 1px solid #d2d2d2 !important"
+    >
       <!-- teameat logo img -->
       <a href="/">
         <img
@@ -29,7 +34,7 @@
       <!-- 검색창 -->
       <v-responsive max-width="240">
         <v-text-field
-          id="search-box"
+          class="search_box"
           hide-details
           dense
           filled
@@ -214,7 +219,7 @@ export default {
   font-size: 1em;
 }
 
-#search-box input::placeholder {
+.search_box input::placeholder {
   color: red !important;
   opacity: 1;
 }

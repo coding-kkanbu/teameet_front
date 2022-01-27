@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main class="pt-13">
     <!-- 토픽 탭 -->
     <v-container>
       <v-row>
