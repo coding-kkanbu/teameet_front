@@ -10,10 +10,8 @@
       <!-- teameat logo img -->
       <a href="/">
         <img
-          alt="Teameat Logo"
-          class="shrink ml-4"
-          src="../assets/tm_img/tm_logo.png"
-          transition="scale-transition"
+          class="ml-4"
+          src="@/assets/tm_img/tm_logo.png"
           width="100"
       /></a>
 
@@ -94,10 +92,8 @@
       <v-card class="pa-6" color="#FFFFFF">
         <v-toolbar cards flat class="my-6">
           <img
-            alt="Teameat Logo"
-            class="shrink mx-auto"
-            src="../assets/tm_img/tm_shy.png"
-            transition="scale-transition"
+            class="mx-auto"
+            src="@/assets/tm_img/tm_shy.png"
             width="200"
           />
         </v-toolbar>
