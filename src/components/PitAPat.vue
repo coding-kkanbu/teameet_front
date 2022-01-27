@@ -7,9 +7,8 @@
           <v-row class="fill-height" align="center" justify="center">
             <v-col cols="6" class="text-center white--text">
               <img
-                class="shrink mx-auto mt-8"
-                src="../assets/tm_img/tm_shy_white.png"
-                transition="scale-transition"
+                class="mx-auto mt-8"
+                src="@/assets/tm_img/tm_shy_white.png"
                 width="100"
               />
               <h1 class="mb-3" style="font-size: 3.5rem">두근두근</h1>
@@ -18,7 +17,13 @@
                 찾아보세요!
               </p>
               <v-card-actions class="justify-center mt-5">
-                <v-btn color="secondary" width="215" height="60" x-large>
+                <v-btn
+                  :href="papUrls.write"
+                  color="secondary"
+                  width="215"
+                  height="60"
+                  x-large
+                >
                   소개글 올리기
                 </v-btn>
               </v-card-actions>
@@ -42,13 +47,17 @@
     </v-container>
 
     <!-- 소개팅 카드 -->
-    <v-container v-for="category in categories" :key="category.name" class="mt-1">
+    <v-container
+      v-for="category in categories"
+      :key="category.name"
+      class="mt-1"
+    >
       <v-row align="center" justify="center">
         <v-col cols="11">
           <h2 class="mb-1 ml-1">{{ category.name }}</h2>
           <v-row align="start" justify="start">
             <v-col cols="6" v-for="post in posts" :key="post.id">
-              <v-card href="postdetail" tile outlined height="186">
+              <v-card :href="papUrls.read" tile outlined height="186">
                 <v-card-text class="pb-0">
                   {{ post.region }} | {{ post.gender }} | {{ post.age }}
                 </v-card-text>
@@ -85,12 +94,21 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- 두근두근 글쓰기 버튼 -->
+    <a :href="papUrls.write">
+      <img class="write mt-8" src="@/assets/tm_btn/write_pap.png" width="70" />
+    </a>
   </v-main>
 </template>
 
 <script>
 export default {
   data: () => ({
+    papUrls: {
+      read: '/pitapat/postdetail',
+      write: '/pitapat/write'
+    },
     categories: [{ name: '셀프소개팅' }, { name: '소개팅' }, { name: '미팅' }],
     posts: [
       {
@@ -125,5 +143,11 @@ export default {
 .v-btn {
   font-weight: bold;
   font-size: 1.2em;
+}
+
+.write {
+  position: fixed;
+  bottom: 2rem;
+  right: 9rem;
 }
 </style>

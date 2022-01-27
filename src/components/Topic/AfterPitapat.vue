@@ -4,7 +4,7 @@
     <v-container>
       <v-row>
         <v-col cols="6" v-for="post in PaginatedPosts" :key="post.id">
-          <v-card href="postdetail" tile outlined height="186">
+          <v-card :href="topicUrls.read" tile outlined height="186">
             <v-card-title class="font-weight-bold">
               {{ post.title.substr(0, 25) }}
             </v-card-title>
@@ -43,12 +43,26 @@
         ></v-pagination>
       </v-row>
     </v-container>
+
+    <!-- 토픽 글쓰기 버튼 -->
+    <a :href="topicUrls.write">
+      <img
+        class="write mt-8"
+        src="@/assets/tm_btn/write_topic.png"
+        width="70"
+      />
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
+    topicUrls: {
+      read: '/topic/postdetail',
+      write: '/topic/write'
+    },
+
     pagination: {
       curpageNum: 1,
       pageSize: 8
@@ -174,5 +188,11 @@ export default {
 <style scoped>
 a:hover {
   color: #d4525d;
+}
+
+.write {
+  position: fixed;
+  bottom: 2rem;
+  right: 9rem;
 }
 </style>
