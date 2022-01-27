@@ -145,7 +145,7 @@ export default {
   data: () => ({
     menus: [
       { name: 'Home', url: '/' },
-      { name: '토픽', url: '/topic' },
+      { name: '토픽', url: '/topic/afterpitapat' },
       { name: '두근두근', url: '/pitapat' }
     ],
     notifications: 1,
