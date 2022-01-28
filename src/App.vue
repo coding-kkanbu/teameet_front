@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <AppBar />
 
     <v-container class="#E5E5E5">

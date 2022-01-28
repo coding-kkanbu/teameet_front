@@ -3,29 +3,30 @@
     <!-- posts -->
     <v-container>
       <v-row>
-        <v-col cols="6" v-for="post in PaginatedPosts" :key="post.id">
-          <v-card :href="topicUrls.read" tile outlined height="186">
-            <v-card-title class="font-weight-bold">
+        <v-col v-for="post in PaginatedPosts" :key="post.id" class="col-12 col-md-6">
+          <v-card :href="topicUrls.read" tile outlined style="height:100%;">
+            <v-card-title class="font-weight-bold" style="height:64px; line-height: 48px; overflow: hidden;">
               {{ post.title.substr(0, 25) }}
             </v-card-title>
             <v-card-text
               class="black--text"
-              style="height: 85px"
+              style="min-height: 104px;"
               v-text="post.content.substr(0, 100)"
-            ></v-card-text>
-            <v-card-actions
+            >
+            </v-card-text>
+            <v-card-text
               class="px-4"
               style="color: #a6a6a6; font-size: 12px"
             >
-              <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
+              <v-icon dense size="14" color="#A6A6A6">mdi-eye</v-icon>
               {{ post.hit }}
-              <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
+              <v-icon dense size="14" color="#A6A6A6" class="ml-2">mdi-fire</v-icon>
               {{ post.like }}
-              <v-icon dense color="#A6A6A6">
+              <v-icon dense size="14" color="#A6A6A6" class="ml-2">
                 mdi-message-processing-outline
               </v-icon>
               {{ post.comment }}
-            </v-card-actions>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -188,11 +189,5 @@ export default {
 <style scoped>
 a:hover {
   color: #d4525d;
-}
-
-.write {
-  position: fixed;
-  bottom: 2rem;
-  right: 9rem;
 }
 </style>
