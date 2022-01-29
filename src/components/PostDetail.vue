@@ -1,10 +1,9 @@
 <template>
   <v-main>
     <v-container>
-      <!-- Post -->
       <v-row>
         <v-col cols="8">
-          <!-- 상단 제목 -->
+
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
@@ -24,7 +23,6 @@
             </v-card>
           </v-row>
 
-          <!-- 내용 -->
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-text class="black--text">{{ post.content }}</v-card-text>
@@ -44,9 +42,8 @@
           </v-row>
         </v-col>
 
-        <!-- Side -->
         <v-col cols="4">
-          <!-- Hot Posts -->
+
           <v-card outlined>
             <v-card-title class="primary--text font-weight-bold">
               {{ post.category }} 추천 글
@@ -66,7 +63,7 @@
               </v-list-item-group>
             </v-list>
           </v-card>
-          <!-- Tag Cloud -->
+
           <v-card class="mt-3" outlined>
             <v-card-title class="primary--text font-weight-bold"
               >TAGS</v-card-title
@@ -82,16 +79,13 @@
               Years
             </v-chip>
           </v-card>
-          <!-- image -->
+
           <v-card class="mt-3" outlined>
             image
           </v-card>
         </v-col>
       </v-row>
 
-      <!-- Comment -->
-
-      <!-- Create -->
       <v-row align="start" justify="start">
         <v-col cols="6">
           <v-textarea
@@ -106,10 +100,8 @@
         </v-col>
       </v-row>
 
-      <!-- Read -->
       <v-row align="start" justify="start">
         <v-col cols="8" v-for="comment in comments" :key="comment.id">
-          <!-- Comment -->
           <v-card elevation="0">
             <v-card-title>{{ comment.owner }}</v-card-title>
             <v-card-text class="black--text">{{ comment.content }}</v-card-text>
@@ -123,7 +115,6 @@
               </div>
             </v-card-text>
 
-            <!-- Reply -->
             <v-card
               color="#F5F6F8"
               class="pl-8"

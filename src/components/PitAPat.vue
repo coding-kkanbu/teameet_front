@@ -1,6 +1,5 @@
 <template>
   <v-main class="pt-10">
-    <!-- 두근두근 소개 -->
     <v-container>
       <v-col cols="12" class="pt-0">
         <v-card outlined tile color="grey" height="387">
@@ -33,7 +32,6 @@
       </v-col>
     </v-container>
 
-    <!-- 공지사항 -->
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="11">
@@ -46,7 +44,6 @@
       </v-row>
     </v-container>
 
-    <!-- 소개팅 카드 -->
     <v-container
       v-for="category in categories"
       :key="category.name"
@@ -95,7 +92,6 @@
       </v-row>
     </v-container>
 
-    <!-- 두근두근 글쓰기 버튼 -->
     <a :href="papUrls.write">
       <img class="write mt-8" src="@/assets/tm_btn/write_pap.png" width="70" />
     </a>

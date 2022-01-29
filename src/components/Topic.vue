@@ -1,6 +1,5 @@
 <template>
   <v-main class="pt-13">
-    <!-- 토픽 탭 -->
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -22,7 +21,6 @@
       <v-divider class="mx-5"></v-divider>
     </v-container>
 
-    <!-- 토픽 테이블 -->
     <router-view/>
   </v-main>
 </template>

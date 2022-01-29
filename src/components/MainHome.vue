@@ -1,6 +1,5 @@
 <template>
   <v-main>
-    <!-- 윈도우 -->
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -35,7 +34,6 @@
       </v-row>
     </v-container>
 
-    <!-- 두근두근 후기 카드 (cols 12) -->
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -89,7 +87,6 @@
       </v-row>
     </v-container>
 
-    <!-- 나머지 토픽 카드 (cols 6) -->
     <v-container>
       <v-row>
         <v-col v-for="category in categories" :key="category.name" cols="6">

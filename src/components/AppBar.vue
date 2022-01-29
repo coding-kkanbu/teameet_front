@@ -1,13 +1,11 @@
 <template>
   <div>
-    <!-- AppBar -->
     <v-app-bar
       app
       color="#FFFFFF"
       flat
       style="border-bottom: 1px solid #d2d2d2 !important"
     >
-      <!-- teameat logo img -->
       <a href="/">
         <img
           class="ml-4"
@@ -15,7 +13,6 @@
           width="100"
       /></a>
 
-      <!-- 탭 -->
       <v-tabs centered class="pl-n12 black--text" color="primary">
         <v-tabs-slider></v-tabs-slider>
         <v-tab
@@ -29,7 +26,6 @@
 
       <v-spacer></v-spacer>
 
-      <!-- 검색창 -->
       <v-responsive max-width="240">
         <v-text-field
           class="search_box"
@@ -44,7 +40,6 @@
         </v-text-field>
       </v-responsive>
 
-      <!-- 알림 버튼 -->
       <v-badge
         :content="notifications"
         :value="notifications"
@@ -54,7 +49,6 @@
         <v-icon color="black" class="pl-5">mdi-bell</v-icon>
       </v-badge>
 
-      <!-- 계정 버튼 -->
       <v-menu offset-y left bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn text class="pl-3" v-bind="attrs" v-on="on">
@@ -87,7 +81,6 @@
       </v-menu>
     </v-app-bar>
 
-    <!-- login dialog -->
     <v-dialog v-model="dialog.login" width="553" height="600">
       <v-card class="pa-6" color="#FFFFFF">
         <v-toolbar cards flat class="my-6">

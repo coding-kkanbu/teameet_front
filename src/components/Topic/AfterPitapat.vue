@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- posts -->
     <v-container>
       <v-row>
         <v-col cols="6" v-for="post in PaginatedPosts" :key="post.id">
@@ -31,7 +30,6 @@
       </v-row>
     </v-container>
 
-    <!-- pagination -->
     <v-container>
       <v-row align="bottom" justify="center">
         <v-pagination
@@ -44,7 +42,6 @@
       </v-row>
     </v-container>
 
-    <!-- 토픽 글쓰기 버튼 -->
     <a :href="topicUrls.write">
       <img
         class="write mt-8"
