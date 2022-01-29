@@ -4,8 +4,8 @@
       <v-row>
         <v-col cols="12">
           <v-card flat>
-            <v-window v-model="onboarding">
-              <v-window-item v-for="n in length" :key="`card-${n}`">
+            <v-window v-model="windowOnboarding">
+              <v-window-item v-for="n in windowItemCnt" :key="`card-${n}`">
                 <v-card rounded outlined color="grey" height="200">
                   <v-row class="fill-height" align="center" justify="center">
                     <h1 style="font-size: 5rem" class="white--text">
@@ -17,9 +17,9 @@
             </v-window>
 
             <v-card-actions class="justify-center">
-              <v-item-group v-model="onboarding" class="text-center" mandatory>
+              <v-item-group v-model="windowOnboarding" class="text-center" mandatory>
                 <v-item
-                  v-for="n in length"
+                  v-for="n in windowItemCnt"
                   :key="`btn-${n}`"
                   v-slot="{ active, toggle }"
                 >
@@ -165,8 +165,8 @@ export default {
         comment_cnt: 100
       }
     ],
-    length: 3,
-    onboarding: 0
+    windowItemCnt: 3,
+    windowOnboarding: 0
   }),
 
   methods: {}
