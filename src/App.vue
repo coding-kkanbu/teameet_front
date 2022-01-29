@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <AppBar />
 
