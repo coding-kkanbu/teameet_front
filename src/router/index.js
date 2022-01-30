@@ -5,6 +5,7 @@ import Topic from '@/components/Topic.vue'
 import SubTopic from '@/components/SubTopic.vue'
 import PitAPat from '@/components/PitAPat.vue'
 import PostDetail from '@/components/PostDetail.vue'
+import PitapatDetail from '@/components/PitapatDetail.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ export default new Router({
     { path: '/', component: MainHome },
     { path: '/pitapat', component: PitAPat },
     { path: '/topic/postdetail', component: PostDetail },
+    { path: '/pitapat/postdetail', component: PitapatDetail },
     {
       path: '/topic',
       component: Topic,
