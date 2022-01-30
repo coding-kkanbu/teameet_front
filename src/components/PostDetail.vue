@@ -13,12 +13,18 @@
                 {{ post.title }}
               </v-card-title>
               <v-card-text color="#A6A6A6">
-                {{ post.owner }}<br />
-                <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
-                &nbsp;&nbsp;{{ post.updated_at }}&nbsp;
-                <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
-                &nbsp;&nbsp;{{ post.hit }}
-                <v-btn icon><v-icon>mdi-dots-horizontal</v-icon></v-btn>
+                <v-row align="end">
+                  <v-col>
+                    {{ post.owner }}<br />
+                    <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
+                    &nbsp;&nbsp;{{ post.updated_at }}&nbsp;
+                    <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
+                    &nbsp;&nbsp;{{ post.hit }}
+                  </v-col>
+                  <v-col class="text-right mr-1">
+                    <v-btn icon><v-icon>mdi-dots-horizontal</v-icon></v-btn>
+                  </v-col>
+                </v-row>
               </v-card-text>
             </v-card>
           </v-row>
@@ -80,9 +86,7 @@
             </v-chip>
           </v-card>
 
-          <v-card class="mt-3" outlined>
-            image
-          </v-card>
+          <v-card class="mt-3" outlined> image </v-card>
         </v-col>
       </v-row>
 
@@ -96,7 +100,7 @@
           ></v-textarea>
         </v-col>
         <v-col cols="2" class="ml-0">
-          <v-btn outlined block height="130">등록하기</v-btn>
+          <v-btn class="comment_submit_btn" outlined block height="130">등록하기</v-btn>
         </v-col>
       </v-row>
 
@@ -207,7 +211,7 @@ export default {
 </script>
 
 <style scoped>
-.v-btn,
+.comment_submit_btn,
 .v-text-field--outlined >>> fieldset {
   border-color: #e5e5e5;
   border-width: 2px;

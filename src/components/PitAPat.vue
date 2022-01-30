@@ -141,9 +141,7 @@ export default {
   font-size: 1.2em;
 }
 
-.write {
-  position: fixed;
-  bottom: 2rem;
-  right: 9rem;
+a:hover {
+  color: #d4525d;
 }
 </style>
