@@ -1,5 +1,5 @@
 <template>
-  <v-main class="pt-10">
+  <div>
     <v-container>
       <v-col cols="12" class="pt-0">
         <v-card outlined tile color="grey" height="387">
@@ -95,7 +95,7 @@
     <a :href="papUrls.write">
       <img class="write mt-8" src="@/assets/tm_btn/write_pap.png" width="70" />
     </a>
-  </v-main>
+  </div>
 </template>
 
 <script>

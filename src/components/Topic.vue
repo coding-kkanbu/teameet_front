@@ -1,5 +1,5 @@
 <template>
-  <v-main class="pt-13">
+  <div class="pt-2">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -22,7 +22,7 @@
     </v-container>
 
     <router-view/>
-  </v-main>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <div class="pt-6">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -37,7 +37,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-card height="210" dense outlined rounded>
+          <v-card height="211" dense outlined rounded>
             <v-card-title class="pa-3">
               <v-icon color="secondary">mdi-heart-pulse</v-icon>
               &nbsp;&nbsp;두근두근 후기
@@ -71,7 +71,7 @@
                         <v-col cols="3" class="pa-0 text-right">
                           <v-list-item-action>
                             <v-list-item-action-text>
-                              {{ post.owner.substr(0, 14) }}
+                              {{ post.owner.substr(0, 12) }}
                               &nbsp;· &nbsp;{{ post.updated_at }}
                             </v-list-item-action-text>
                           </v-list-item-action>
@@ -90,7 +90,7 @@
     <v-container>
       <v-row>
         <v-col v-for="category in categories" :key="category.name" cols="6">
-          <v-card height="210" dense outlined rounded>
+          <v-card height="211" dense outlined rounded>
             <v-card-title class="pa-3">
               <v-icon>{{ category.icon }}</v-icon>
               &nbsp;&nbsp;{{ category.name }}
@@ -103,9 +103,9 @@
                     <template>
                       <v-row no-gutters dense align="center">
                         <v-list-item-content class="ml-3">
-                          <v-list-item-title>{{
-                            post.title
-                          }}</v-list-item-title>
+                          <v-list-item-title>
+                            {{ post.title }}
+                          </v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-action>
                           <v-list-item-action-text>
@@ -127,7 +127,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-main>
+  </div>
 </template>
 
 <script>
@@ -149,7 +149,7 @@ export default {
         comment_cnt: 100
       },
       {
-        title: '드디어 사랑이 찾아오는가, 준봇의 두근두근 썰썰썰',
+        title: '드디어 사랑이 찾아오는가, 준봇의 두근두근 썰썰썰썰썰썰썰썰썰썰썰썰',
         content: '~~',
         owner: '둑흔준보',
         updated_at: '2022.1.17',
@@ -157,7 +157,8 @@ export default {
         comment_cnt: 100
       },
       {
-        title: '이제 나도 민간인! 기다려라 세상아.............................',
+        title:
+          '이제 나도 민간인! 기다려라 세상아....................................',
         content: '~~',
         owner: '자신있는라회택',
         updated_at: '2022.1.17',

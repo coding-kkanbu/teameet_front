@@ -1,17 +1,17 @@
 <template>
-  <v-app id="app">
+  <v-app id="inspire">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <AppBar />
 
-    <v-container class="#E5E5E5">
-      <v-row>
-        <v-col class="col-12 col-md-10" offset-md="1">
-
-          <router-view/>
-
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-main class="pt-10">
+      <v-container class="#E5E5E5">
+        <v-row>
+          <v-col class="col-12 col-md-10" offset-md="1">
+            <router-view/>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
 
   </v-app>
 </template>

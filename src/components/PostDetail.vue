@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <div class="pt-5">
     <v-container>
       <v-row>
         <v-col cols="8">
@@ -143,7 +143,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-main>
+  </div>
 </template>
 
 <script>
