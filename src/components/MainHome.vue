@@ -89,7 +89,7 @@
 
     <v-container>
       <v-row>
-        <v-col v-for="category in categories" :key="category.name" cols="6">
+        <v-col v-for="category in categories" :key="category.name" class="col-12 col-lg-6">
           <v-card height="211" dense outlined rounded>
             <v-card-title class="pa-3">
               <v-icon>{{ category.icon }}</v-icon>
