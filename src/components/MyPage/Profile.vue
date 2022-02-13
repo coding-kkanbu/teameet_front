@@ -28,21 +28,32 @@
             </v-row>
             <v-row>
               <v-col cols="3">
-                <h5>가입한 날짜</h5>
+                <h5>랜덤 닉네임</h5>
+                <h5 class="mt-3">가입한 날짜</h5>
                 <h5 class="mt-3">작성한 글</h5>
                 <h5 class="mt-3">인증 여부</h5>
               </v-col>
-              <v-col>
-                <h5>가입한 날짜</h5>
-                <h5 class="mt-3">작성한 글</h5>
+              <v-col style="color: #a6a6a6">
+                <h5>{{ me.random_name }}</h5>
+                <h5 class="mt-3">{{ me.created_at }}</h5>
+                <h5 class="mt-3">{{ me.posts }}</h5>
                 <v-row class="pa-0 ma-0" align="end">
-                  <h5 class="mt-3">{{ me.is_verify }}</h5>
-                  <v-col
-                    v-show="!me.is_verify"
-                    cols="2"
-                    class="text-right pa-0"
-                  >
-                    <v-btn id="verify" small color="secondary">인증</v-btn>
+                  <v-col class="pa-0 mx-0 mt-2">
+                    <v-btn
+                      v-show="!me.is_verify"
+                      id="verify"
+                      small
+                      color="primary"
+                      >인증하기</v-btn
+                    >
+                    <v-btn
+                      v-show="me.is_verify"
+                      id="verify"
+                      small
+                      disabled
+                      color="primary"
+                      >인증완료</v-btn
+                    >
                   </v-col>
                 </v-row>
               </v-col>
@@ -63,7 +74,7 @@
                 auto-grow
               ></v-textarea>
             </v-row>
-            <v-row justify="end" class="mt-2">
+            <v-row justify="end" class="mt-1">
               <v-btn color="primary" width="120px" @click="change(introduce)"
                 >변경</v-btn
               >
@@ -109,7 +120,10 @@
               @click="change(pwd)"
               >비밀번호 변경하기</v-btn
             ><br />
-            <span style="font-size:14px;">가입하신 이메일 주소로 비밀번호 변경을 위한 메일을 발송합니다.</span>
+            <span style="font-size: 14px"
+              >가입하신 이메일 주소로 비밀번호 변경을 위한 메일을
+              발송합니다.</span
+            >
           </v-col>
         </v-row>
 
@@ -135,10 +149,12 @@ export default {
     me: {
       email: 'user@example.com',
       nickname: '승쨩',
-      random_name: 'string',
+      random_name: '지각한북극곰',
       profile_image: 'string',
+      created_at: '2022-02-02',
       is_verify: false,
-      introduce: '기존 소개글이 여기에 나타납니다.'
+      introduce: '기존 소개글이 여기에 나타납니다.',
+      posts: 38
     },
 
     filled: ''
@@ -172,7 +188,7 @@ export default {
 <style scoped>
 #verify {
   font-weight: bold;
-  width: 50px;
+  width: 75px;
   height: 20px !important;
 }
 .v-btn {
