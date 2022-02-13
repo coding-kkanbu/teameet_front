@@ -74,7 +74,7 @@
               <v-list-item-title @click="logout">로그아웃</v-list-item-title>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>My Page</v-list-item-title>
+              <router-link to="/mypage/profile">My Page</router-link>
             </v-list-item>
           </template>
         </v-list>
