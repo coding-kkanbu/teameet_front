@@ -64,7 +64,9 @@
               ></v-textarea>
             </v-row>
             <v-row justify="end" class="mt-2">
-              <v-btn color="primary" @click="change(introduce)">변경</v-btn>
+              <v-btn color="primary" width="120px" @click="change(introduce)"
+                >변경</v-btn
+              >
             </v-row>
           </v-col>
         </v-row>
@@ -91,34 +93,23 @@
                 <v-btn
                   color="primary"
                   :disabled="!filled"
+                  width="120px"
                   @click="change(nickname)"
                 >
-                  닉네임 변경
+                  변경
                 </v-btn>
               </v-col>
             </v-row>
 
-            <h5 class="mb-2">비밀번호 변경</h5>
-            <v-form
-              id="pwdchgForm"
-              ref="pwdchgForm"
-              class="pa-0 ma-0"
-              v-for="pwd in pwds"
-              :key="pwd.name"
-            >
-              <v-text-field
-                :name="pwd.name"
-                :label="pwd.label"
-                class="mb-2"
-                outlined
-                dense
-                hide-details
-              ></v-text-field>
-            </v-form>
-
-            <v-row justify="end" class="mt-8">
-              <v-btn color="primary" @click="change(pwd)">비밀번호 변경</v-btn>
-            </v-row>
+            <h5>비밀번호 변경</h5>
+            <v-btn
+              color="primary"
+              class="my-3"
+              width="150px"
+              @click="change(pwd)"
+              >비밀번호 변경하기</v-btn
+            ><br />
+            <span style="font-size:14px;">가입하신 이메일 주소로 비밀번호 변경을 위한 메일을 발송합니다.</span>
           </v-col>
         </v-row>
 
@@ -150,13 +141,7 @@ export default {
       introduce: '기존 소개글이 여기에 나타납니다.'
     },
 
-    filled: '',
-
-    pwds: [
-      { name: 'old_password', label: '원래 비밀번호' },
-      { name: 'new_password1', label: '새로운 비밀번호' },
-      { name: 'new_password2', label: '새로운 비밀번호 확인' }
-    ]
+    filled: ''
   })
 
   //   methods: {
@@ -191,7 +176,6 @@ export default {
   height: 20px !important;
 }
 .v-btn {
-  width: 120px;
   height: 40px !important;
   box-shadow: none;
 }
