@@ -4,6 +4,7 @@ import Vue from 'vue'
 import vuetify from '@/plugins/vuetify'
 import App from './App'
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -12,6 +13,11 @@ new Vue({
   vuetify,
   el: '#inspire',
   router,
+  store,
+  beforeCreate () {
+    // this.$store.dispatch('getUserInfo')
+    this.$store.commit('loginSuccess')
+  },
   components: { App },
   template: '<App/>'
 }).$mount('#inspire')
