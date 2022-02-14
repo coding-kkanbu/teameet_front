@@ -15,8 +15,8 @@ new Vue({
   router,
   store,
   beforeCreate () {
-    // this.$store.dispatch('getUserInfo')
-    this.$store.commit('loginSuccess')
+    // this.$store.dispatch('userStore/getUserInfo')
+    this.$store.commit('userStore/loginSuccess')
   },
   components: { App },
   template: '<App/>'
