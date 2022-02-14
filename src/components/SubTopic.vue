@@ -32,7 +32,7 @@
     </v-container>
 
     <v-container>
-      <v-row align="bottom" justify="center">
+      <v-row justify="center">
         <v-pagination
           v-model="pagination.curpageNum"
           :length="TotalPages"
