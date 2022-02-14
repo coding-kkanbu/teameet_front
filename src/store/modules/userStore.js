@@ -79,6 +79,7 @@ const userStore = {
       //     .get('/accounts/logout/')
       //     .then(res => {
       //       console.log('Logout GET res', res)
+      localStorage.removeItem('access_token')
       alert(`${state.me.username}님이 로그아웃 하셨습니다.`)
       commit('logoutSuccess')
       // })
