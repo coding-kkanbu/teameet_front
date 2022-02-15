@@ -8,6 +8,7 @@ import PostDetail from '@/components/PostDetail.vue'
 import PitapatDetail from '@/components/PitapatDetail.vue'
 import MyPage from '@/components/MyPage/MyPage.vue'
 import Profile from '@/components/MyPage/Profile.vue'
+import MyPosts from '@/components/MyPage/MyPosts.vue'
 
 Vue.use(Router)
 
@@ -31,7 +32,8 @@ export default new Router({
       component: MyPage,
       props: true,
       children: [
-        { path: 'profile', component: Profile }
+        { path: 'profile', component: Profile },
+        { path: 'posts', component: MyPosts }
       ]
     }
   ]
