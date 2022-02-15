@@ -4,14 +4,20 @@ import Vue from 'vue'
 import vuetify from '@/plugins/vuetify'
 import App from './App'
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   vuetify,
-  el: '#app',
+  el: '#inspire',
   router,
+  store,
+  beforeCreate () {
+    // this.$store.dispatch('userStore/getUserInfo')
+    this.$store.commit('userStore/loginSuccess')
+  },
   components: { App },
   template: '<App/>'
-}).$mount('#app')
+}).$mount('#inspire')
