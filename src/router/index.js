@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import MainHome from '@/components/MainHome.vue'
 import Topic from '@/components/Topic.vue'
 import SubTopic from '@/components/SubTopic.vue'
-import PitAPat from '@/components/PitAPat.vue'
 import PostDetail from '@/components/PostDetail.vue'
-import PitapatDetail from '@/components/PitapatDetail.vue'
+import PitAPat from '@/components/PitAPat/PitAPat.vue'
+import PitapatDetail from '@/components/PitAPat/Detail.vue'
+import PitapatWrite from '@/components/PitAPat/Write.vue'
 import MyPage from '@/components/MyPage/MyPage.vue'
 import Profile from '@/components/MyPage/Profile.vue'
 import MyPosts from '@/components/MyPage/MyPosts.vue'
@@ -19,6 +20,7 @@ export default new Router({
     { path: '/pitapat', component: PitAPat },
     { path: '/topic/postdetail', component: PostDetail },
     { path: '/pitapat/postdetail', component: PitapatDetail },
+    { path: '/pitapat/write', component: PitapatWrite },
     {
       path: '/topic',
       component: Topic,
