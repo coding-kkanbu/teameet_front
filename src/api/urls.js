@@ -1,8 +1,8 @@
 const API_VERSION = 'v1'
 
 export default {
-  BaseDev: 'http://localhost:8000/',
-  API: `http://localhost:8000/api/${API_VERSION}/`,
+  Django_Base: 'http://localhost:8000/',
+  Django_API: `${this.Django_Base}api/${API_VERSION}/`,
 
   /* Category */
   category: 'category/',
