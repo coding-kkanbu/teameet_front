@@ -31,7 +31,7 @@
           </v-row>
         </v-form>
         <v-card-actions>
-          <v-btn block large color="primary" depressed @click="save">
+          <v-btn block large color="primary" depressed @click="login">
             로그인
           </v-btn>
         </v-card-actions>
@@ -41,18 +41,18 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
+import api from '@/api/modules/auth'
 
 export default {
   computed: {
     ...mapState('userStore', ['dialog', 'loginState', 'me'])
   },
   methods: {
-    ...mapActions('userStore', ['login']),
-    save () {
-      console.log('save()...')
+    login () {
+      console.log('vue login()...')
       const postData = new FormData(document.getElementById('login-form'))
-      this.login(postData)
+      api.login(postData)
       this.$refs.loginForm.reset()
     }
   }

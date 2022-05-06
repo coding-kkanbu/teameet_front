@@ -83,7 +83,8 @@
 
 <script>
 import LogIn from '@/components/LogIn.vue'
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+import api from '@/api/modules/auth'
 
 export default {
   components: { LogIn },
@@ -103,7 +104,9 @@ export default {
 
   methods: {
     ...mapMutations('userStore', ['dialogOpen']),
-    ...mapActions('userStore', ['logout'])
+    logout () {
+      api.logout()
+    }
   }
 }
 </script>

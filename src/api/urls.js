@@ -1,20 +1,20 @@
 const API_VERSION = 'v1'
+const DjangoBase = 'http://localhost:8000/'
 
 export default {
-  Django_Base: 'http://localhost:8000/',
-  Django_API: `${this.Django_Base}api/${API_VERSION}/`,
+  Django_API: `${DjangoBase}api/${API_VERSION}/`,
 
   /* Category */
-  category: 'category/',
+  categories: 'category/',
   categoryUnique: (id) => {
     return `category/${id}/`
   },
-  categoryRecentPosts: (id) => {
+  recentPostsByCategory: (id) => {
     return `category/${id}/recent_posts/`
   },
 
   /* Post */
-  post: 'post/',
+  posts: 'post/',
   postUnique: (id) => {
     return `post/${id}/`
   },
@@ -29,7 +29,7 @@ export default {
   },
 
   /* Comment */
-  comment: 'comment/',
+  comments: 'comment/',
   commentUnique: (id) => {
     return `comment/${id}/`
   },
@@ -38,6 +38,18 @@ export default {
   },
   commentLike: (id) => {
     return `comment/${id}/toggle_commentlike/`
+  },
+
+  /* Auth */
+  login: 'login/',
+  logout: '',
+  register: '',
+  MyInfo: 'users/me/',
+
+  /* Users */
+  allUsers: 'users/',
+  UserInfo: (username) => {
+    return `users/${username}`
   }
 
 }

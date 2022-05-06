@@ -60,11 +60,11 @@
                           <v-list-item-action>
                             <v-list-item-action-text>
                               <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
-                              {{ post.like }}
+                              {{ post.postlike_n }}
                               <v-icon dense color="#A6A6A6">
                                 mdi-message-processing-outline
                               </v-icon>
-                              {{ post.comment_cnt }}
+                              {{ post.comment_n }}
                             </v-list-item-action-text>
                           </v-list-item-action>
                         </v-col>
@@ -89,16 +89,16 @@
 
     <v-container>
       <v-row>
-        <v-col v-for="category in categories" :key="category.name" class="col-12 col-lg-6">
+        <v-col v-for="recentPosts in recentPostsByCategory" :key="recentPosts.category" class="col-12 col-lg-6">
           <v-card height="211" dense outlined rounded>
             <v-card-title class="pa-3">
-              <v-icon>{{ category.icon }}</v-icon>
-              &nbsp;&nbsp;{{ category.name }}
+              <v-icon>{{ categoryIcons[recentPosts.category] }}</v-icon>
+              &nbsp;&nbsp;{{ recentPosts.category }}
             </v-card-title>
             <v-divider class="mx-5"></v-divider>
             <v-list>
               <v-list-item-group active-class="primary--text">
-                <template v-for="(post, index) in posts">
+                <template v-for="(post, index) in recentPosts.posts">
                   <v-list-item :key="index" dense>
                     <template>
                       <v-row no-gutters dense align="center">
@@ -110,11 +110,11 @@
                         <v-list-item-action>
                           <v-list-item-action-text>
                             <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
-                            {{ post.like }}
+                            {{ post.postlike_n }}
                             <v-icon dense color="#A6A6A6">
                               mdi-message-processing-outline
                             </v-icon>
-                            {{ post.comment_cnt }}
+                            {{ post.comment_n }}
                           </v-list-item-action-text>
                         </v-list-item-action>
                       </v-row>
@@ -131,47 +131,28 @@
 </template>
 
 <script>
+import api from '@/api/modules/post'
 export default {
   data: () => ({
-    categories: [
-      { name: '헬스 · 다이어트', icon: 'mdi-fire' },
-      { name: '주식 · 투자', icon: 'mdi-cash-plus' },
-      { name: '썸 · 연애', icon: 'mdi-puzzle-heart' },
-      { name: '맛집 · 여행', icon: 'mdi-coffee-outline' }
-    ],
-    posts: [
-      {
-        title: '개발보다 설레는 대상을 찾았어요...',
-        content: '~~',
-        owner: '행복한쌈코비빔밥dddddddd',
-        updated_at: '2022.1.17',
-        like: 30,
-        comment_cnt: 100
-      },
-      {
-        title: '드디어 사랑이 찾아오는가, 준봇의 두근두근 썰썰썰썰썰썰썰썰썰썰썰썰',
-        content: '~~',
-        owner: '둑흔준보',
-        updated_at: '2022.1.17',
-        like: 30,
-        comment_cnt: 100
-      },
-      {
-        title:
-          '이제 나도 민간인! 기다려라 세상아....................................',
-        content: '~~',
-        owner: '자신있는라회택',
-        updated_at: '2022.1.17',
-        like: 30,
-        comment_cnt: 100
-      }
-    ],
+    categoryIcons: {
+      '헬스 · 다이어트': 'mdi-fire',
+      '주식 · 투자': 'mdi-cash-plus',
+      '썸 · 연애': 'mdi-puzzle-heart',
+      '맛집 · 여행': 'mdi-coffee-outline'
+    },
+    categoryIds: [],
+    recentPostsByCategory: [],
     windowItemCnt: 3,
     windowOnboarding: 0
   }),
 
-  methods: {}
+  created () {
+    api.getCategoryIds(this)
+    for (var categoryId in this.categoryIds) {
+      api.getRecentPostsByCategory(this, categoryId)
+    }
+  }
 }
 </script>
 
-<style scoped></style>;
+<style scoped></style>
