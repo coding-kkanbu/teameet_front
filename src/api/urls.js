@@ -6,11 +6,11 @@ export default {
 
   /* Category */
   categories: 'category/',
-  categoryUnique: (id) => {
-    return `category/${id}/`
+  allPostsBycategory: (name) => {
+    return `category/${name}/`
   },
-  recentPostsByCategory: (id) => {
-    return `category/${id}/recent_posts/`
+  recentPostsByCategory: (name) => {
+    return `category/${name}/recent_posts/`
   },
 
   /* Post */

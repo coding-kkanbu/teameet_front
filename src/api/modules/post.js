@@ -15,16 +15,29 @@ export default {
       })
   },
 
-  getRecentPostsByCategory (component, categoryId) {
-    console.log('getRecentPostsByCategory()...')
+  getRecentPostsByCategory (component, categoryName) {
+    console.log('getRecentPostsByCategory()...', categoryName)
     myAxios
-      .get(Urls.recentPostsByCategory(categoryId))
+      .get(Urls.recentPostsByCategory(categoryName))
       .then(response => {
         console.log('getRecentPostsByCategory GET response', response)
         component.recentPostsByCategory.push({'category': response.data.name, 'posts': response.data.post_set})
       })
       .catch(error => {
         console.log('getRecentPostsByCategory GET error', error.response)
+      })
+  },
+
+  getAllPostsByCategory (component, categoryName) {
+    console.log('getAllPostsByCategory()...', categoryName)
+    myAxios
+      .get(Urls.allPostsBycategory(categoryName))
+      .then(response => {
+        console.log('getAllPostsByCategory GET response', response)
+        component.allPostsBycategory = response.data.post_set
+      })
+      .catch(error => {
+        console.log('getAllPostsByCategory GET error', error.response)
       })
   }
 }

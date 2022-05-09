@@ -74,11 +74,11 @@
                     <v-icon dense color="#A6A6A6">mdi-eye </v-icon>
                     {{ post.hit }}
                     <v-icon dense color="#A6A6A6">mdi-fire</v-icon>
-                    {{ post.like }}
+                    {{ post.like_n }}
                     <v-icon dense color="#A6A6A6">
                       mdi-message-processing-outline</v-icon
                     >
-                    {{ post.comment }}
+                    {{ post.comment_n }}
                   </v-col>
                   <v-col class="text-right pa-0">
                     <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import api from '@/api/modules/post'
+
 export default {
   data: () => ({
     papUrls: {
@@ -106,32 +108,12 @@ export default {
       write: '/pitapat/write'
     },
     categories: [{ name: '셀프소개팅' }, { name: '소개팅' }, { name: '미팅' }],
-    posts: [
-      {
-        region: '전주',
-        gender: '남',
-        age: '29',
-        title: '전주 비빔밥 좋아하시는 분?',
-        content: '~~',
-        hit: '100',
-        like: '100',
-        comment: '100',
-        updated_at: '2022.1.17'
-      },
-      {
-        region: '서울',
-        gender: '남',
-        age: '31',
-        title: '따뜻한 남자 좋아하시는 분?',
-        content:
-          '키 178에 몸무게 70정도 나가는 보통 체형입니다. 웃는 게 예쁜 분이 이상형이에요. 편하게 답글 남겨주세요!',
-        hit: '100',
-        like: '100',
-        comment: '100',
-        updated_at: '10초 전'
-      }
-    ]
-  })
+    allPostsBycategory: []
+  }),
+
+  created () {
+    api.getAllPostsByCategory(this, 'pitapat')
+  }
 }
 </script>
 
