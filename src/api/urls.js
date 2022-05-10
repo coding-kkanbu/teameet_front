@@ -6,25 +6,25 @@ export default {
 
   /* Category */
   categories: 'category/',
-  allPostsBycategory: (name) => {
-    return `category/${name}/`
+  allPostsBycategory: (slug) => {
+    return `category/${slug}/`
   },
-  recentPostsByCategory: (name) => {
-    return `category/${name}/recent_posts/`
+  recentPostsByCategory: (slug) => {
+    return `category/${slug}/recent_posts/`
   },
 
   /* Post */
   posts: 'post/',
-  postUnique: (id) => {
+  uniquePost: (id) => {
     return `post/${id}/`
   },
   postComments: (id) => {
     return `post/${id}/get_comments`
   },
-  postBlame: (id) => {
+  BlamePost: (id) => {
     return `post/${id}/toggle_postblame/`
   },
-  postLike: (id) => {
+  LikePost: (id) => {
     return `post/${id}/toggle_postlike/`
   },
 
