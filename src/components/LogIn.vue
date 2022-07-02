@@ -46,7 +46,7 @@ import api from '@/api/modules/auth'
 
 export default {
   computed: {
-    ...mapState('userStore', ['dialog', 'loginState', 'me'])
+    ...mapState('userStore', ['dialog', 'isLogin', 'user'])
   },
   methods: {
     login () {

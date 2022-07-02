@@ -1,47 +1,49 @@
 import myAxios from '@/api/AxiosInstanceController'
 import Urls from '@/api/urls'
+import userStore from '@/store/modules/userStore'
 
 export default {
-  login (postData) {
-    console.log('login()...')
+  register (postData) {
     myAxios
-      .post(Urls.login, postData)
+      .post(Urls.auth_Register, postData)
       .then(response => {
-        console.log('Login POST response', response)
-        localStorage.setItem('access_token', response.data.token)
-        this.getMyInfo()
+        userStore.commit('dialogOpen', 'login')
       })
       .catch(error => {
-        console.log('Login POST error', error.response)
-        if (error.response.status === 404) {
-          alert('아이디 혹은 비밀번호를 다시 확인해주세요')
-        }
+        console.log('register POST error', error)
       })
   },
 
-  getMyInfo () {
-    console.log('getMyInfo()...')
+  login (postData) {
     myAxios
-      .get(Urls.getMyInfo)
+      .post(Urls.auth_Login, postData)
       .then(response => {
-        console.log('getMyInfo GET response', response)
-        let userInfo = response.data
-        this.$store.commit('userStore/loginSuccess', userInfo)
+        localStorage.setItem('access_token', response.data.token)
+        this.getUserDetail()
       })
       .catch(error => {
-        console.log('getMyInfo GET error', error.response)
+        console.log('Login POST error', error.response)
+      })
+  },
+
+  getUserDetail () {
+    myAxios
+      .get(Urls.auth_GetUserDetail)
+      .then(response => {
+        userStore.commit('loginSuccess', response.data)
+      })
+      .catch(error => {
+        console.log('getUserDetail GET error', error.response)
       })
   },
 
   logout () {
-    console.log('logout()...')
     myAxios
-      .get(Urls.logout)
+      .get(Urls.auth_Logout)
       .then(response => {
-        console.log('Logout GET response', response)
         localStorage.removeItem('access_token')
-        alert(`${this.$store.state.userStore.me.username}님이 로그아웃 하셨습니다.`)
-        this.$store.commit('userStore/logoutSuccess')
+        alert(`${userStore.state.user.name}님이 로그아웃 하셨습니다.`)
+        userStore.commit('logoutSuccess')
       })
       .catch(error => {
         console.log('Logout GET error.response', error.response)

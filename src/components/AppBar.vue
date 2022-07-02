@@ -51,13 +51,13 @@
           <v-btn text class="pl-3" v-bind="attrs" v-on="on">
             <v-icon color="black"> mdi-account</v-icon>
             <span style="color: black; font-weight: bold">
-              {{ me.username }}
+              {{ user.name }}
             </span>
           </v-btn>
         </template>
 
         <v-list style="text-align: center">
-          <template v-if="!loginState.isLogin">
+          <template v-if="!isLogin">
             <v-list-item>
               <v-list-item-title>회원가입</v-list-item-title>
             </v-list-item>
@@ -99,7 +99,7 @@ export default {
   }),
 
   computed: {
-    ...mapState('userStore', ['loginState', 'me'])
+    ...mapState('userStore', ['isLogin', 'user'])
   },
 
   methods: {

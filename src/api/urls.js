@@ -41,10 +41,10 @@ export default {
   },
 
   /* Auth */
-  login: 'login/',
-  logout: '',
-  register: '',
-  MyInfo: 'users/me/',
+  auth_Register: '',
+  auth_Login: 'login/',
+  auth_Logout: '',
+  auth_GetUserDetail: 'users/me/',
 
   /* Users */
   allUsers: 'users/',

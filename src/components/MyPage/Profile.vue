@@ -20,9 +20,9 @@
           <v-col cols="8" class="pt-0">
             <v-row>
               <v-col class="mt-3">
-                <h3>{{ me.nickname }}</h3>
+                <h3>{{ user.nickname }}</h3>
                 <span style="font-size: 14px; color: #c4c4c4">
-                  {{ me.email }}
+                  {{ user.email }}
                 </span>
               </v-col>
             </v-row>
@@ -34,20 +34,20 @@
                 <h5 class="mt-3">인증 여부</h5>
               </v-col>
               <v-col style="color: #a6a6a6">
-                <h5>{{ me.random_name }}</h5>
-                <h5 class="mt-3">{{ me.created_at }}</h5>
-                <h5 class="mt-3">{{ me.posts }}</h5>
+                <h5>{{ user.random_name }}</h5>
+                <h5 class="mt-3">{{ user.created_at }}</h5>
+                <h5 class="mt-3">{{ user.posts }}</h5>
                 <v-row class="pa-0 ma-0" align="end">
                   <v-col class="pa-0 mx-0 mt-2">
                     <v-btn
-                      v-show="!me.is_verify"
+                      v-show="!user.is_verify"
                       id="verify"
                       small
                       color="primary"
                       >인증하기</v-btn
                     >
                     <v-btn
-                      v-show="me.is_verify"
+                      v-show="user.is_verify"
                       id="verify"
                       small
                       disabled
@@ -68,7 +68,7 @@
           <v-col cols="8" class="pt-7">
             <v-row>
               <v-textarea
-                v-model="me.introduce"
+                v-model="user.introduce"
                 name="introduce"
                 outlined
                 auto-grow
@@ -146,7 +146,7 @@
 
 export default {
   data: () => ({
-    me: {
+    user: {
       email: 'user@example.com',
       nickname: '승쨩',
       random_name: '지각한북극곰',
