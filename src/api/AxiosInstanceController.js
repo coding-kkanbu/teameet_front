@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import axios from 'axios'
 import Urls from '@/api/urls'
 
@@ -15,7 +15,7 @@ function setInterceptors (instance) {
     function (config) {
       const accessToken = localStorage.getItem('access_token')
       if (accessToken) {
-        config.headers['Authorization'] = accessToken
+        config.headers['Authorization'] = `Bearer ${accessToken}`
       }
       return config
     },
@@ -29,10 +29,10 @@ function setInterceptors (instance) {
       return response
     },
     function (error) {
-      Vue.$log.error('!intercept error!', error)
-      Vue.$log.error('status : ', error.response.status)
-      Vue.$log.error('message : ', error.response.data.message)
-      return Promise.reject(error.response)
+      // Vue.$log.error('!intercept error!', error)
+      // Vue.$log.error('status : ', error.response.status)
+      // Vue.$log.error('message : ', error.response.data.message)
+      return Promise.reject(error)
     })
 
   return instance

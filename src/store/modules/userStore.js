@@ -1,4 +1,5 @@
 const userStore = {
+  namespaced: true,
   state: {
     dialog: {
       register: false,
@@ -6,7 +7,7 @@ const userStore = {
     },
     isLogin: false,
     user: {
-      name: 'Guest'
+      username: 'Guest'
     }
   },
   mutations: {
@@ -19,13 +20,12 @@ const userStore = {
     },
     loginSuccess (state, userDetail) {
       state.isLogin = true
-      // state.user.name = userDetail.name
-      state.user.name = 'sz'
+      state.user = userDetail
       state.dialog.login = false
     },
     logoutSuccess (state) {
       state.isLogin = false
-      state.user.name = 'Guest'
+      state.user.username = 'Guest'
     }
   }
 }

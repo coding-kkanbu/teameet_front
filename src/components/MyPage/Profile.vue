@@ -20,7 +20,7 @@
           <v-col cols="8" class="pt-0">
             <v-row>
               <v-col class="mt-3">
-                <h3>{{ user.nickname }}</h3>
+                <h3>{{ user.username }}</h3>
                 <span style="font-size: 14px; color: #c4c4c4">
                   {{ user.email }}
                 </span>

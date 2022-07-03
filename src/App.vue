@@ -17,11 +17,14 @@
 </template>
 
 <script>
-import AppBar from './components/AppBar.vue'
+import api from '@/api/modules/accounts'
+import AppBar from '@/components/Common/AppBar.vue'
 
 export default {
   name: 'App',
-
+  created () {
+    api.getMyDetail()
+  },
   components: {
     AppBar
   }
