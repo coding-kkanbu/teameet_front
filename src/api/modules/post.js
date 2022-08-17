@@ -1,40 +1,46 @@
 import myAxios from '@/api/AxiosInstanceController'
 import Urls from '@/api/urls'
+import postStore from '@/store/modules/postStore'
+// import store from '@/store'
 
 export default {
-  getCategoryIds (component) {
-    console.log('getCategoryIds()...')
-    myAxios
-      .get(Urls.categories)
+  async getCategories () {
+    await myAxios
+      .get(Urls.category_All)
       .then(response => {
-        console.log('getCategoryIds GET response', response)
-        component.categoryIds = response.data
+        postStore.state.categories = response.data.results
       })
       .catch(error => {
-        console.log('getCategoryIds GET error', error.response)
+        console.log('getCategories GET error', error.response)
       })
   },
 
-  getRecentPostsByCategory (component, slug) {
-    console.log('getRecentPostsByCategory()...', slug)
+  getRecentPosts (component, category) {
     myAxios
-      .get(Urls.recentPostsByCategory(slug))
+      .get(Urls.category_RecentPosts(category.slug))
       .then(response => {
-        console.log('getRecentPostsByCategory GET response', response)
-        component.recentPostsByCategory.push({'category': response.data.name, 'posts': response.data.post_set})
+        if (category.name === '두근두근 후기') {
+          component.recentPostsByCategory.unshift({
+            'category': category.name,
+            'posts': response.data
+          })
+        } else {
+          component.recentPostsByCategory.push({
+            'category': category.name,
+            'posts': response.data
+          })
+        }
       })
       .catch(error => {
-        console.log('getRecentPostsByCategory GET error', error.response)
+        console.log('getRecentPosts GET error', error.response)
       })
   },
 
-  getAllPostsByCategory (component, slug) {
-    console.log('getAllPostsByCategory()...', slug)
+  getAllPostsByCategory (component, category) {
     myAxios
-      .get(Urls.allPostsBycategory(slug))
+      .get(Urls.category_AllPosts(category))
       .then(response => {
-        console.log('getAllPostsByCategory GET response', response)
-        component.allPostsBycategory = response.data.post_set
+        component.category_AllPosts = response.data.post_set
       })
       .catch(error => {
         console.log('getAllPostsByCategory GET error', error.response)
@@ -42,11 +48,9 @@ export default {
   },
 
   getPost (component, id) {
-    console.log('getPost()...', id)
     myAxios
       .get(Urls.postUnique(id))
       .then(response => {
-        console.log('getPost GET response', response)
         component.post = response.data
         this.getPostComments(component, id)
       })
@@ -56,11 +60,9 @@ export default {
   },
 
   getPostComments (component, id) {
-    console.log('getPostComments()...', id)
     myAxios
       .get(Urls.uniquePost(id))
       .then(response => {
-        console.log('getPostComments GET response', response)
         component.comments = response.data
       })
       .catch(error => {
@@ -73,7 +75,6 @@ export default {
     myAxios
       .delete(Urls.postUnique(id))
       .then(response => {
-        console.log('deletePost DELETE response', response)
         component.post = response.data
       })
       .catch(error => {

@@ -102,21 +102,9 @@ export default {
   async created () {
     await api.getCategories()
 
-    Promise.all(
-      this.categories.map(async category => {
-        if (category.name === '두근두근 후기') {
-          this.recentPostsByCategory.unshift({
-            'category': category.name,
-            'posts': await api.getRecentPosts(category.slug)
-          })
-        } else {
-          this.recentPostsByCategory.push({
-            'category': category.name,
-            'posts': await api.getRecentPosts(category.slug)
-          })
-        }
-      })
-    )
+    this.categories.map(category => {
+      api.getRecentPosts(this, category)
+    })
   }
 }
 </script>
