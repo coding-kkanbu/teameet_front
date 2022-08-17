@@ -30,8 +30,8 @@
             type="password"
           ></v-text-field>
           <v-text-field
-            v-model="postData.nickname"
-            name="nickname"
+            v-model="postData.username"
+            name="username"
             label="닉네임"
             outlined
             color="primary"
@@ -64,7 +64,7 @@ export default {
       email: '',
       password1: '',
       password2: '',
-      nickname: ''
+      username: ''
     }
   }),
   computed: {
