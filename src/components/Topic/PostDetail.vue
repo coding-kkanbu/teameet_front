@@ -35,7 +35,7 @@
               <v-card-text>
                 <div style="font-size: 15px; font-weight: bold">
                   <v-icon color="secondary">mdi-fire</v-icon>
-                  <span style="color: #d4525d">{{ post.like }}</span
+                  <span style="color: #d4525d">{{ post.like_n }}</span
                   >&nbsp;&nbsp;&nbsp;&nbsp;
                   <v-icon color="#A6A6A6"
                     >mdi-message-processing-outline</v-icon

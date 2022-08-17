@@ -9,7 +9,7 @@
               class="black--text"
               v-for="category in categories"
               :key="category.name"
-              :to="`/topic/${category.route}`"
+              :to="{ name: 'subtopic', params: { subtopic: category.slug } }"
               exact
             >
               {{ category.name }}
@@ -21,23 +21,22 @@
       <v-divider class="mx-5"></v-divider>
     </v-container>
 
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Topic',
 
   data: () => ({
-    categories: [
-      { name: '두근두근 후기', route: 'afterpitapat' },
-      { name: '헬스 · 다이어트', route: 'health' },
-      { name: '주식 · 투자', route: 'invest' },
-      { name: '썸 · 연애', route: 'ssum' },
-      { name: '맛집 · 여행', route: 'travel' }
-    ]
   }),
+
+  computed: {
+    ...mapState('postStore', ['categories'])
+  },
 
   methods: {}
 }
