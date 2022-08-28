@@ -11,6 +11,7 @@
               :key="category.name"
               :to="{ name: 'subtopic', params: { subtopic: category.slug } }"
               exact
+              @click="changeTab(category)"
             >
               {{ category.name }}
             </v-tab>
@@ -27,17 +28,27 @@
 
 <script>
 import { mapState } from 'vuex'
+import api from '@/api/modules/post'
 
 export default {
   name: 'Topic',
 
-  data: () => ({
-  }),
+  data: () => ({}),
 
   computed: {
     ...mapState('postStore', ['categories'])
   },
 
-  methods: {}
+  async created () {
+    if (this.categories.length === 0) {
+      await api.getCategories()
+    }
+  },
+
+  methods: {
+    changeTab (category) {
+      api.getAllPostsByCategory(category.slug, 1)
+    }
+  }
 }
 </script>

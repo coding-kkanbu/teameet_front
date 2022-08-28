@@ -1,7 +1,9 @@
 const postStore = {
   namespaced: true,
   state: {
-    categories: []
+    categories: [],
+    allPostsBycategory: [],
+    totalPages: 0
   },
 
   mutations: {

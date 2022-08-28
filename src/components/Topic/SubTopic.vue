@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="post in PaginatedPosts" :key="post.id" class="col-12 col-md-6">
+        <v-col v-for="post in allPostsBycategory" :key="post.id" class="col-12 col-md-6">
           <v-card :href="topicUrls.read" tile outlined style="height:100%;">
             <v-card-title class="font-weight-bold" style="height:64px; line-height: 48px; overflow: hidden;">
               {{ post.title.substr(0, 25) }}
@@ -34,11 +34,12 @@
     <v-container>
       <v-row justify="center">
         <v-pagination
-          v-model="pagination.curpageNum"
-          :length="TotalPages"
+          v-model="curpageNum"
+          :length="totalPages"
           color="secondary"
           prev-icon="mdi-chevron-left"
           next-icon="mdi-chevron-right"
+          @input="page"
         ></v-pagination>
       </v-row>
     </v-container>
@@ -54,38 +55,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import api from '@/api/modules/post'
 
 export default {
   data: () => ({
-    categoryName: document.location.pathname.split('/').pop(),
     topicUrls: {
       read: '/topic/postdetail',
       write: '/topic/write'
     },
-
-    pagination: {
-      curpageNum: 1,
-      pageSize: 8
-    },
-
-    allPostsBycategory: []
+    curpageNum: 1
   }),
 
   computed: {
-    TotalPages () {
-      return Math.ceil(this.allPostsBycategory.length / this.pagination.pageSize)
-    },
-
-    PaginatedPosts () {
-      const start = (this.pagination.curpageNum - 1) * this.pagination.pageSize
-      const end = start + this.pagination.pageSize
-      return this.allPostsBycategory.slice(start, end)
-    }
+    ...mapState('postStore', ['allPostsBycategory', 'totalPages'])
   },
 
   created () {
-    api.getAllPostsByCategory(this, this.categoryName)
+    api.getAllPostsByCategory(this.$route.params.subtopic, this.curpageNum)
+  },
+
+  methods: {
+    page () {
+      api.getAllPostsByCategory(this.$route.params.subtopic, this.curpageNum)
+    }
   }
 }
 </script>
