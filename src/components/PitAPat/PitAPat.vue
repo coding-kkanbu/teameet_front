@@ -23,9 +23,8 @@
       <v-divider class="mx-5"></v-divider>
     </v-container>
 
-    <now-hot v-show="$route.params.subtopic === 'hot'"></now-hot>
-
-    <router-view />
+    <now-hot v-if="$route.params.subtopic === 'hot'"></now-hot>
+    <router-view v-else />
   </div>
 </template>
 
