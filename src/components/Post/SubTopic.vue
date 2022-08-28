@@ -2,24 +2,35 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="post in allPostsBycategory" :key="post.id" class="col-12 col-md-6">
-          <v-card :href="topicUrls.read" tile outlined style="height:100%;">
-            <v-card-title class="font-weight-bold" style="height:64px; line-height: 48px; overflow: hidden;">
+        <v-col
+          v-for="post in allPostsBycategory"
+          :key="post.id"
+          class="col-12 col-md-6"
+        >
+          <v-card
+            :to="{ name: $route.path.split('/')[1] + 'Detail', params: { subtopic: $route.params.subtopic, postId: post.id } }"
+            tile
+            outlined
+            style="height: 100%"
+          >
+            <v-card-title
+              class="font-weight-bold"
+              style="height: 64px; line-height: 48px; overflow: hidden"
+            >
               {{ post.title.substr(0, 25) }}
             </v-card-title>
             <v-card-text
               class="black--text"
-              style="min-height: 104px;"
+              style="min-height: 104px"
               v-text="post.content.substr(0, 100)"
             >
             </v-card-text>
-            <v-card-text
-              class="px-4"
-              style="color: #a6a6a6; font-size: 12px"
-            >
+            <v-card-text class="px-4" style="color: #a6a6a6; font-size: 12px">
               <v-icon dense size="14" color="#A6A6A6">mdi-eye</v-icon>
               {{ post.hit }}
-              <v-icon dense size="14" color="#A6A6A6" class="ml-2">mdi-fire</v-icon>
+              <v-icon dense size="14" color="#A6A6A6" class="ml-2"
+                >mdi-fire</v-icon
+              >
               {{ post.like_n }}
               <v-icon dense size="14" color="#A6A6A6" class="ml-2">
                 mdi-message-processing-outline
@@ -44,13 +55,13 @@
       </v-row>
     </v-container>
 
-    <a :href="topicUrls.write">
+    <router-link :to="{ name: 'topicWrite' }">
       <img
         class="write mt-8"
         src="@/assets/tm_btn/write_topic.png"
         width="70"
       />
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -60,10 +71,6 @@ import api from '@/api/modules/post'
 
 export default {
   data: () => ({
-    topicUrls: {
-      read: '/topic/postdetail',
-      write: '/topic/write'
-    },
     curpageNum: 1
   }),
 
@@ -72,7 +79,9 @@ export default {
   },
 
   created () {
-    api.getAllPostsByCategory(this.$route.params.subtopic, this.curpageNum)
+    if (this.$route.params.subtopic !== 'hot') {
+      api.getAllPostsByCategory(this.$route.params.subtopic, this.curpageNum)
+    }
   },
 
   methods: {

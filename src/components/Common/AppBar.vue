@@ -93,8 +93,8 @@ export default {
   data: () => ({
     menus: [
       { name: 'Home', url: {name: 'home'} },
-      { name: '토픽', url: { name: 'topic' } },
-      { name: '두근두근', url: {name: 'pitapat'} }
+      { name: '토픽', url: { name: 'topicSubtopic', params: {subtopic: 'afterpitapat'} } },
+      { name: '두근두근', url: { name: 'pitapatSubtopic', params: {subtopic: 'hot'} } }
     ],
     notifications: 1
   }),

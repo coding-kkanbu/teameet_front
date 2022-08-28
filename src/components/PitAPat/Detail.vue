@@ -6,10 +6,12 @@
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
-                두근두근 > {{ post.category }}
+                두근두근 > {{ post.category_set.name }}
               </v-card-subtitle>
               <v-card-text class="pb-0 black--text font-weight-bold">
-                {{ post.region }} | {{ post.gender }} | {{ post.age }}
+                {{ post.sogaetingoption.region }} |
+                {{ post.sogaetingoption.age }}살 |
+                {{ post.sogaetingoption.gender === 1 ? "남" : "여" }}
               </v-card-text>
               <v-card-title class="font-weight-bold">
                 {{ post.title }}
@@ -17,9 +19,9 @@
               <v-card-text color="#A6A6A6">
                 <v-row align="end">
                   <v-col>
-                    {{ post.owner }}<br />
+                    {{ post.writer.username }}<br />
                     <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
-                    &nbsp;&nbsp;{{ post.updated_at }}&nbsp;
+                    &nbsp;&nbsp;{{ post.created }}&nbsp;
                     <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
                     &nbsp;&nbsp;{{ post.hit }}
                   </v-col>
@@ -60,7 +62,7 @@
         <v-col cols="4">
           <v-card outlined>
             <v-card-title class="primary--text font-weight-bold">
-              {{ post.category }} 추천 글
+              {{ post.category_set.name }} 추천 글
             </v-card-title>
             <v-list dense>
               <v-list-item-group>
@@ -82,16 +84,20 @@
             <v-card-title class="primary--text font-weight-bold"
               >TAGS</v-card-title
             >
-            <v-chip
-              class="ma-2 font-weight-bold"
-              color="primary"
-              text-color="white"
-            >
-              <v-avatar left class="white primary--text font-weight-bold">
-                1
-              </v-avatar>
-              Years
-            </v-chip>
+            <v-chip-group active-class="primary--text" column>
+              <v-chip
+                v-for="(tag, index) in post.tags"
+                :key="tag"
+                class="ma-2 font-weight-bold"
+                color="primary"
+                text-color="white"
+              >
+                <v-avatar left class="white primary--text font-weight-bold">
+                  {{ index + 1 }}
+                </v-avatar>
+                {{ tag }}
+              </v-chip>
+            </v-chip-group>
           </v-card>
 
           <v-card class="mt-3" outlined> image </v-card>
@@ -108,7 +114,9 @@
           ></v-textarea>
         </v-col>
         <v-col cols="2" class="ml-0">
-          <v-btn class="comment_submit_btn" outlined block height="130">등록하기</v-btn>
+          <v-btn class="comment_submit_btn" outlined block height="130"
+            >등록하기</v-btn
+          >
         </v-col>
       </v-row>
 
@@ -159,65 +167,17 @@
 </template>
 
 <script>
+import api from '@/api/modules/post'
+
 export default {
   data: () => ({
-    post: {
-      category: '셀프소개팅',
-      region: '서울',
-      gender: '남',
-      age: '31',
-      title: '따뜻한 남자 좋아하시는 분?',
-      content:
-        '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람은 우리 작고 밥을 군영과 생의 그들은 것이다. 위하여 무엇이 못할 피에 철환하였는가? 얼마나 얼음 생의 귀는 청춘에서만 찾아다녀도, 꽃이 끓는다. 뛰노는 얼음이 이 타오르고 공자는 아니다. 가는 오직 청춘의 새 쓸쓸한 때에, 맺어, 것은 보는 철환하였는가? 충분히 인간의 보이는 너의 청춘 때에, 청춘의 품에 때문이다. 구하기 트고, 인간의 피가 그러므로 하는 청춘의 그들의 청춘에서만 있다.',
-      owner: '행복한쌈코비빔밥dddddddd',
-      updated_at: '2022.1.17',
-      hit: 900,
-      like: 30,
-      comment: 100
-    },
-
-    comments: [
-      {
-        owner: '승쨩',
-        content:
-          '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람',
-        created_at: '2022.1.17',
-        like: 30,
-        reply: [
-          {
-            owner: '리디',
-            content:
-              '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람',
-            created_at: '2022.1.17',
-            like: 10
-          },
-          {
-            owner: '태기',
-            content:
-              '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람',
-            created_at: '2022.1.17',
-            like: 40
-          }
-        ]
-      },
-      {
-        owner: '리디',
-        content:
-          '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람',
-        created_at: '2022.1.17',
-        like: 10
-      },
-      {
-        owner: '태기',
-        content:
-          '것은 피어나는 되려니와, 뜨고, 이것이다. 꽃이 못할 있는 동산에는 천지는 때문이다. 설레는 미묘한 피에 이상이 그림자는 인생에 새 사막이다. 귀는 얼마나 사람',
-        created_at: '2022.1.17',
-        like: 40
-      }
-    ],
-
+    post: {},
     hotposts: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-  })
+  }),
+
+  created () {
+    api.getPostDetail(this, 'pitapat', this.$route.params.postId)
+  }
 }
 </script>
 

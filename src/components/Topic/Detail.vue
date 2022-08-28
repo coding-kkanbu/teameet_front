@@ -3,11 +3,10 @@
     <v-container>
       <v-row>
         <v-col cols="8">
-
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
-                {{ post.category }}
+                {{ post.category_set.name }}
               </v-card-subtitle>
               <v-card-title class="font-weight-bold">
                 {{ post.title }}
@@ -15,9 +14,9 @@
               <v-card-text color="#A6A6A6">
                 <v-row align="end">
                   <v-col>
-                    {{ post.owner }}<br />
+                    {{ post.writer.username }}<br />
                     <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
-                    &nbsp;&nbsp;{{ post.updated_at }}&nbsp;
+                    &nbsp;&nbsp;{{ post.created }}&nbsp;
                     <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
                     &nbsp;&nbsp;{{ post.hit }}
                   </v-col>
@@ -49,10 +48,9 @@
         </v-col>
 
         <v-col cols="4">
-
           <v-card outlined>
             <v-card-title class="primary--text font-weight-bold">
-              {{ post.category }} 추천 글
+              {{ post.category_set.name }} 추천 글
             </v-card-title>
             <v-list dense>
               <v-list-item-group>
@@ -74,16 +72,20 @@
             <v-card-title class="primary--text font-weight-bold"
               >TAGS</v-card-title
             >
-            <v-chip
-              class="ma-2 font-weight-bold"
-              color="primary"
-              text-color="white"
-            >
-              <v-avatar left class="white primary--text font-weight-bold">
-                1
-              </v-avatar>
-              Years
-            </v-chip>
+            <v-chip-group active-class="primary--text" column>
+              <v-chip
+                v-for="(tag, index) in post.tags"
+                :key="tag"
+                class="ma-2 font-weight-bold"
+                color="primary"
+                text-color="white"
+              >
+                <v-avatar left class="white primary--text font-weight-bold">
+                  {{ index + 1 }}
+                </v-avatar>
+                {{ tag }}
+              </v-chip>
+            </v-chip-group>
           </v-card>
 
           <v-card class="mt-3" outlined> image </v-card>
@@ -100,7 +102,9 @@
           ></v-textarea>
         </v-col>
         <v-col cols="2" class="ml-0">
-          <v-btn class="comment_submit_btn" outlined block height="130">등록하기</v-btn>
+          <v-btn class="comment_submit_btn" outlined block height="130"
+            >등록하기</v-btn
+          >
         </v-col>
       </v-row>
 
@@ -161,7 +165,7 @@ export default {
   }),
 
   created () {
-    api.getPost(this, 'pitapat')
+    api.getPostDetail(this, 'topic', this.$route.params.postId)
   }
 }
 </script>

@@ -17,7 +17,11 @@
             </v-window>
 
             <v-card-actions class="justify-center">
-              <v-item-group v-model="windowOnboarding" class="text-center" mandatory>
+              <v-item-group
+                v-model="windowOnboarding"
+                class="text-center"
+                mandatory
+              >
                 <v-item
                   v-for="n in windowItemCnt"
                   :key="`btn-${n}`"
@@ -36,17 +40,35 @@
 
     <v-container>
       <v-row>
-        <v-col v-for="recentPosts in recentPostsByCategory" :key="recentPosts.category" :class="[recentPosts.category === '두근두근 후기' ? 'col-12' : 'col-12 col-lg-6']">
+        <v-col
+          v-for="recentPosts in recentPostsByCategory"
+          :key="recentPosts.category.name"
+          :class="[
+            recentPosts.category.name === '두근두근 후기'
+              ? 'col-12'
+              : 'col-12 col-lg-6',
+          ]"
+        >
           <v-card height="211" dense outlined rounded>
             <v-card-title class="pa-3">
-              <v-icon>{{ categoryIcons[recentPosts.category] }}</v-icon>
-              &nbsp;&nbsp;{{ recentPosts.category }}
+              <v-icon>{{ categoryIcons[recentPosts.category.name] }}</v-icon>
+              &nbsp;&nbsp;{{ recentPosts.category.name }}
             </v-card-title>
             <v-divider class="mx-5"></v-divider>
             <v-list>
               <v-list-item-group active-class="primary--text">
                 <template v-for="(post, index) in recentPosts.posts">
-                  <v-list-item :key="index" dense>
+                  <v-list-item
+                    :key="index"
+                    dense
+                    :to="{
+                      name: 'topicDetail',
+                      params: {
+                        subtopic: recentPosts.category.slug,
+                        postId: post.id,
+                      },
+                    }"
+                  >
                     <template>
                       <v-row no-gutters dense align="center">
                         <v-list-item-content class="ml-3">
@@ -102,7 +124,7 @@ export default {
   async created () {
     await api.getCategories()
 
-    this.categories.map(category => {
+    this.categories.map((category) => {
       api.getRecentPosts(this, category)
     })
   }

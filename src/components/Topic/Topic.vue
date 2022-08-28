@@ -7,10 +7,16 @@
             <v-tabs-slider></v-tabs-slider>
             <v-tab
               class="black--text"
+              :to="{ name: 'topicSubtopic', params: { subtopic: 'afterpitapat' } }"
+              >두근두근 후기</v-tab
+            >
+            <v-tab
+              class="black--text"
               v-for="category in categories"
               :key="category.name"
-              :to="{ name: 'subtopic', params: { subtopic: category.slug } }"
+              :to="{ name: 'topicSubtopic', params: { subtopic: category.slug } }"
               exact
+              v-if="category.name != '두근두근 후기'"
               @click="changeTab(category)"
             >
               {{ category.name }}
