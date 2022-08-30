@@ -122,7 +122,9 @@ export default {
   },
 
   async created () {
-    await api.getCategories()
+    if (this.categories.length === 0) {
+      await api.getCategories()
+    }
 
     this.categories.map((category) => {
       api.getRecentPosts(this, category)
