@@ -6,9 +6,9 @@
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
-                두근두근 > {{ post.category_set.name }}
+                {{category === 'pitapat'?'두근두근':'토픽'}} > {{ post.category_set.name }}
               </v-card-subtitle>
-              <v-card-text class="pb-0 black--text font-weight-bold">
+              <v-card-text v-if="category === 'pitapat'" class="pb-0 black--text font-weight-bold">
                 {{ post.sogaetingoption.region }} |
                 {{ post.sogaetingoption.age }}살 |
                 {{ post.sogaetingoption.gender === 1 ? "남" : "여" }}
@@ -48,9 +48,8 @@
                     <span style="color: #a6a6a6">{{ post.comment }}</span>
                   </v-col>
 
-                  <v-col class="text-right">
-                    <v-btn color="secondary" elevation="0">연결 완료</v-btn>
-                    <v-btn color="primary" outlined>대화하기</v-btn>
+                  <v-col v-if="category === 'pitapat'" class="text-right">
+                    <v-btn @click="connected" color="secondary" elevation="0" :disabled="post.sogaetingoption.connected">연결 완료</v-btn>
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -171,12 +170,20 @@ import api from '@/api/modules/post'
 
 export default {
   data: () => ({
+    category: '',
     post: {},
     hotposts: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
   }),
 
   created () {
-    api.getPostDetail(this, 'pitapat', this.$route.params.postId)
+    this.category = this.$route.path.split('/')[1]
+    api.getPostDetail(this, this.category, this.$route.params.postId)
+  },
+
+  methods: {
+    connected () {
+      api.setPitapatConnected(this, this.category, this.$route.params.postId)
+    }
   }
 }
 </script>
