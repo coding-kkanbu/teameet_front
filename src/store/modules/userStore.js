@@ -3,7 +3,10 @@ const userStore = {
   state: {
     dialog: {
       register: false,
-      login: false
+      login: false,
+      email: false,
+      password: false,
+      image: false
     },
     isLogin: false,
     user: {

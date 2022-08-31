@@ -8,14 +8,23 @@ export default {
   accounts_Register: 'accounts/register/',
   accounts_Login: 'accounts/login/',
   accounts_Logout: 'accounts/logout/',
-  accounts_PasswordReset: 'accounts/password-reset/',
   accounts_TokenRefresh: 'accounts/token/refresh/',
+  accounts_EmailVerification: 'accounts/verify-neis-email/',
+  accounts_PasswordReset: 'accounts/password-reset/',
+  accounts_PasswordChange: 'accounts/password-change/',
 
   /* Users */
-  users_All: 'users/',
-  users_Me: 'users/me/',
+  users: 'users/',
   users_Specific: (username) => {
-    return `users/${username}`
+    return `users/${username}/`
+  },
+
+  users_Me: 'users/me/',
+  users_UploadImage: (username) => {
+    return `users/${username}/upload_image/`
+  },
+  users_MyPosts: (username) => {
+    return `users/${username}/my_posts/`
   },
 
   /* Category */

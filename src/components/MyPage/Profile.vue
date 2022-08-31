@@ -5,12 +5,12 @@
         <v-row justify="center">
           <v-avatar class="profile" color="grey" size="164">
             <v-img
-              src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
+              :src="user.profile_image"
             ></v-img>
           </v-avatar>
         </v-row>
         <v-row justify="center" class="mt-8">
-          <v-btn color="primary">사진 변경</v-btn>
+          <v-btn @click="dialog.image = true" color="primary">사진 변경</v-btn>
         </v-row>
       </v-col>
 
@@ -35,8 +35,8 @@
               </v-col>
               <v-col style="color: #a6a6a6">
                 <h5>{{ user.random_name }}</h5>
-                <h5 class="mt-3">{{ user.created_at }}</h5>
-                <h5 class="mt-3">{{ user.posts }}</h5>
+                <h5 class="mt-3">{{ user.date_joined }}</h5>
+                <h5 class="mt-3">{{ user.post_n }}</h5>
                 <v-row class="pa-0 ma-0" align="end">
                   <v-col class="pa-0 mx-0 mt-2">
                     <v-btn
@@ -44,6 +44,7 @@
                       id="verify"
                       small
                       color="primary"
+                      @click="sendEmail('verification')"
                       >인증하기</v-btn
                     >
                     <v-btn
@@ -68,14 +69,17 @@
           <v-col cols="8" class="pt-7">
             <v-row>
               <v-textarea
-                v-model="user.introduce"
+                v-model="userToUpdate.introduce"
                 name="introduce"
                 outlined
                 auto-grow
               ></v-textarea>
             </v-row>
             <v-row justify="end" class="mt-1">
-              <v-btn color="primary" width="120px" @click="change(introduce)"
+              <v-btn
+                color="primary"
+                width="120px"
+                @click="changeProfile('introduce')"
                 >변경</v-btn
               >
             </v-row>
@@ -92,20 +96,19 @@
             <v-row>
               <v-col cols="9" class="pr-2">
                 <v-text-field
-                  id="nicknamechgForm"
-                  ref="nicknameForm"
-                  name="nickname"
-                  v-model="filled"
+                  ref="username"
+                  name="username"
+                  v-model="userToUpdate.username"
                   outlined
                   dense
+                  :rules="[(v) => !!v || '닉네임을 수정하려면 입력하세요.']"
                 ></v-text-field>
               </v-col>
               <v-col cols="3" class="px-0 text-right">
                 <v-btn
                   color="primary"
-                  :disabled="!filled"
                   width="120px"
-                  @click="change(nickname)"
+                  @click="changeProfile('username')"
                 >
                   변경
                 </v-btn>
@@ -117,7 +120,7 @@
               color="primary"
               class="my-3"
               width="150px"
-              @click="change(pwd)"
+              @click="sendEmail('password')"
               >비밀번호 변경하기</v-btn
             ><br />
             <span style="font-size: 14px"
@@ -132,57 +135,61 @@
         <v-row align="start">
           <v-col cols="11" class="pt-0">
             <v-row justify="end" class="mt-1 mb-3">
-              <v-btn color="secondary">회원 탈퇴</v-btn>
+              <v-btn @click="deleteUser" color="secondary"
+                >회원 탈퇴</v-btn
+              >
             </v-row>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
+
+    <EmailVerification :type="type" />
+    <ProfileImage />
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
+import EmailVerification from '@/components/MyPage/EmailVerification.vue'
+import ProfileImage from '@/components/MyPage/ProfileImage.vue'
+import { mapState } from 'vuex'
+import api from '@/api/modules/accounts'
 
 export default {
+  components: {EmailVerification, ProfileImage},
+
   data: () => ({
-    user: {
-      email: 'user@example.com',
-      nickname: '승쨩',
-      random_name: '지각한북극곰',
-      profile_image: 'string',
-      created_at: '2022-02-02',
-      is_verify: false,
-      introduce: '기존 소개글이 여기에 나타납니다.',
-      posts: 38
+    type: '',
+    userToUpdate: {}
+  }),
+
+  computed: {
+    ...mapState('userStore', ['user', 'dialog'])
+  },
+
+  async created () {
+    await api.getMyDetail()
+    this.userToUpdate = Object.assign({}, this.user)
+  },
+
+  methods: {
+    sendEmail (type) {
+      this.type = type
+      this.dialog.email = true
     },
 
-    filled: ''
-  })
-
-  //   methods: {
-  //     change (kind) {
-  //       console.log('save()...', kind)
-  //       if (kind === 'pwd') {
-  //         this.pwdchg()
-  //         this.$refs.pwdchgForm.reset()
-  //       }
-  //     },
-  //     pwdchg () {
-  //       console.log('pwdchg()...')
-  //       const postData = new FormData(document.getElementById('pwdchgForm'))
-  //       axios
-  //         .post('/accounts/password/change/', postData)
-  //         .then((res) => {
-  //           console.log('PASSWORD CHANGE POST RES', res)
-  //           alert('비밀번호가 변경되었습니다.')
-  //         })
-  //         .catch((err) => {
-  //           console.log('PASSWORD CHANGE POST ERR.RESPONSE', err.response)
-  //           alert('비밀번호 변경을 실패하였습니다.')
-  //         })
-  //     }
-  //   }
+    changeProfile (kind) {
+      if (kind === 'username') {
+        if (!this.$refs[kind].validate()) {
+          return
+        }
+      }
+      api.updateMyInfo({ [kind]: this.userToUpdate[kind] })
+    },
+    deleteUser () {
+      api.deleteUser()
+    }
+  }
 }
 </script>
 <style scoped>
