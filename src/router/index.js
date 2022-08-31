@@ -4,12 +4,11 @@ import Router from 'vue-router'
 import MainHome from '@/components/Common/MainHome.vue'
 import SubTopic from '@/components/Post/SubTopic.vue'
 import PostDetail from '@/components/Post/Detail.vue'
+import PostWrite from '@/components/Post/Write.vue'
 
 import Topic from '@/components/Topic/Topic.vue'
-import TopicWrite from '@/components/Topic/Write.vue'
 
 import PitAPat from '@/components/PitAPat/PitAPat.vue'
-import PitapatWrite from '@/components/PitAPat/Write.vue'
 
 import MyPage from '@/components/MyPage/MyPage.vue'
 import Profile from '@/components/MyPage/Profile.vue'
@@ -62,13 +61,13 @@ export default new Router({
 
     {
       path: '/write/topic',
-      component: TopicWrite,
+      component: PostWrite,
       name: 'topicWrite'
 
     },
     {
       path: '/write/pitapat',
-      component: PitapatWrite,
+      component: PostWrite,
       name: 'pitapatWrite'
     },
 
