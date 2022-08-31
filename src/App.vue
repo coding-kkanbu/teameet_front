@@ -26,7 +26,7 @@ export default {
 
   async created () {
     api.getMyDetail()
-    await postApi.getCategories()
+    await postApi.getTopicCategories()
   }
 }
 </script>

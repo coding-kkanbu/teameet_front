@@ -111,10 +111,6 @@ import api from '@/api/modules/post'
 
 export default {
   data: () => ({
-    papUrls: {
-      read: '/pitapat/postdetail',
-      write: '/pitapat/write'
-    },
     categories: [
       { name: '셀프소개팅', slug: 'selfsogaeting' },
       { name: '소개팅', slug: 'sogaeting' },

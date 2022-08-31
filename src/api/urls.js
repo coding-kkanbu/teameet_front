@@ -19,19 +19,24 @@ export default {
   },
 
   /* Category */
-  category_All: 'category/',
-  category_AllPosts: (slug) => {
-    return `category/${slug}/`
+  category: 'category/',
+  category_PostsByPage: (slug, page) => {
+    return `category/${slug}/?page=${page}`
   },
   category_RecentPosts: (slug) => {
     return `category/${slug}/recent_posts/`
   },
 
-  /* Topic */
-  topic_All: 'topic/',
-  topic_Specific: (id) => {
-    return `topic/${id}/`
+  /* Post */
+  post_Detail: (category, id) => {
+    return `${category}/${id}/`
   },
+  post_Write: (app) => {
+    return `${app}/`
+  },
+
+  /* Topic */
+  topic: 'topic/',
   topic_Comments: (id) => {
     return `topic/${id}/get_comments`
   },
@@ -42,10 +47,10 @@ export default {
     return `topic/${id}/toggle_postlike/`
   },
 
-  /* Topic */
-  pitapat_All: 'pitapat/',
-  pitapat_Specific: (id) => {
-    return `pitapat/${id}/`
+  /* PitAPat */
+  pitapat: 'pitapat/',
+  pitapat_Connected: (id) => {
+    return `pitapat/${id}/connected/`
   },
   pitapat_Comments: (id) => {
     return `pitapat/${id}/get_comments`

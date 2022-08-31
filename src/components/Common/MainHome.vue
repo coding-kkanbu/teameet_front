@@ -123,7 +123,7 @@ export default {
 
   async created () {
     if (this.categories.length === 0) {
-      await api.getCategories()
+      await api.getTopicCategories()
     }
 
     this.categories.map((category) => {

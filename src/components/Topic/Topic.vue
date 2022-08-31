@@ -7,17 +7,24 @@
             <v-tabs-slider></v-tabs-slider>
             <v-tab
               class="black--text"
-              :to="{ name: 'topicSubtopic', params: { subtopic: 'afterpitapat' } }"
+              :to="{
+                name: 'topicSubtopic',
+                params: { subtopic: 'afterpitapat' },
+              }"
+              @click="changeTab('afterpitapat')"
               >두근두근 후기</v-tab
             >
             <v-tab
               class="black--text"
               v-for="category in categories"
               :key="category.name"
-              :to="{ name: 'topicSubtopic', params: { subtopic: category.slug } }"
+              :to="{
+                name: 'topicSubtopic',
+                params: { subtopic: category.slug },
+              }"
               exact
               v-if="category.name != '두근두근 후기'"
-              @click="changeTab(category)"
+              @click="changeTab(category.slug)"
             >
               {{ category.name }}
             </v-tab>
@@ -45,15 +52,9 @@ export default {
     ...mapState('postStore', ['categories'])
   },
 
-  async created () {
-    if (this.categories.length === 0) {
-      await api.getCategories()
-    }
-  },
-
   methods: {
-    changeTab (category) {
-      api.getAllPostsByCategory(category.slug, 1)
+    changeTab (slug) {
+      api.getAllPostsByCategory(slug, 1)
     }
   }
 }
