@@ -1,6 +1,7 @@
-// import Vue from 'vue'
 import axios from 'axios'
 import Urls from '@/api/urls'
+import userStore from '@/store/modules/userStore'
+import accountsApi from '@/api/modules/accounts'
 
 function createAxiosInstance (baseUrl, timeOut) {
   const axiosInstance = axios.create({
@@ -29,21 +30,24 @@ function setInterceptors (instance) {
       return response
     },
     function (error) {
-      if (error.response.status === 404) {
-        // generalStore.state.errorMsg = '잘못된 요청입니다😱'
+      if (error.response.status === 406) {
+        if (error.response.data.messages.token_class === 'AccessToken') {
+          accountsApi.refreshToken()
+        } else {
+          accountsApi.logout()
+          console.logt('토큰 만료, 재로그인 필요')
+          userStore.commit('dialogOpen', 'login')
+        }
+      } else if (error.response.status === 400) {
+        console.log('Error', error.response.data)
+      } else if (error.response.status === 404) {
+        console.log('Error 404', '페이지 찾을 수 없음')
       } else if (error.response.status >= 500) {
-        // generalStore.state.errorMsg = '문제가 생겼습니다😱 잠시 후에 다시 이용해 주세요.'
+        console.log('Error 5xx', '서버 에러')
       } else {
-        // generalStore.state.errorMsg = error.response.data.detail
+        console.log('Error', error.response.data.detail)
       }
       // generalStore.state.dialog.error = true
-
-      console.log('Error', error.response)
-      console.log('Error', error.response.data.detail)
-
-      // Vue.$log.error('!intercept error!', error)
-      // Vue.$log.error('status : ', error.response.status)
-      // Vue.$log.error('message : ', error.response.data.message)
       return Promise.reject(error.response)
     })
 

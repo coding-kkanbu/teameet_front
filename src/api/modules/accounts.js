@@ -20,12 +20,6 @@ export default {
         localStorage.setItem('refresh_token', response.data['refresh_token'])
         this.getMyDetail()
       })
-      .catch(error => {
-        // if ('tokenexpired' === true) {
-        //   this.refreshToken()
-        // }
-        console.log('Login POST error', error.response)
-      })
   },
 
   logout () {
@@ -43,12 +37,6 @@ export default {
       .post(Urls.accounts_TokenRefresh, {'refresh': localStorage.getItem('refresh_token')})
       .then(response => {
         localStorage.setItem('access_token', response.data['access'])
-      })
-      .catch(error => {
-        // if ('tokenexpired' === true) {
-        //   userStore.commit('dialogOpen', 'login')
-        // }
-        console.log('refreshToken POST error', error.response)
       })
   },
 
