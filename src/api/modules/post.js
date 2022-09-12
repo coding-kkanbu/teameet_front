@@ -92,5 +92,13 @@ export default {
       .then(response => {
         this.getPostDetail(component, category, id)
       })
+  },
+
+  getPostsByUser (component, username) {
+    myAxios
+      .get(Urls.users_MyPosts(username))
+      .then(response => {
+        component.posts = response.data.results
+      })
   }
 }
