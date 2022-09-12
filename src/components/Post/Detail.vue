@@ -6,9 +6,13 @@
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
-                {{category === 'pitapat'?'두근두근':'토픽'}} > {{ post.category_set.name }}
+                {{ app === "pitapat" ? "두근두근" : "토픽" }} >
+                {{ post.category_set.name }}
               </v-card-subtitle>
-              <v-card-text v-if="category === 'pitapat'" class="pb-0 black--text font-weight-bold">
+              <v-card-text
+                v-if="app === 'pitapat'"
+                class="pb-0 black--text font-weight-bold"
+              >
                 {{ post.sogaetingoption.region }} |
                 {{ post.sogaetingoption.age }}살 |
                 {{ post.sogaetingoption.gender === 1 ? "남" : "여" }}
@@ -48,8 +52,14 @@
                     <span style="color: #a6a6a6">{{ post.comment }}</span>
                   </v-col>
 
-                  <v-col v-if="category === 'pitapat'" class="text-right">
-                    <v-btn @click="connected" color="secondary" elevation="0" :disabled="post.sogaetingoption.connected">연결 완료</v-btn>
+                  <v-col v-if="app === 'pitapat'" class="text-right">
+                    <v-btn
+                      @click="connected"
+                      color="secondary"
+                      elevation="0"
+                      :disabled="post.sogaetingoption.connected"
+                      >연결 완료</v-btn
+                    >
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -106,14 +116,14 @@
       <v-row align="start" justify="start">
         <v-col cols="6">
           <v-textarea
+            v-model="createComment.comment"
             outlined
-            name="create_comment"
             label="댓글을 등록하세요"
             auto-grow
           ></v-textarea>
         </v-col>
         <v-col cols="2" class="ml-0">
-          <v-btn class="comment_submit_btn" outlined block height="130"
+          <v-btn @click="writeComment" class="comment_submit_btn" outlined block height="130"
             >등록하기</v-btn
           >
         </v-col>
@@ -122,19 +132,18 @@
       <v-row align="start" justify="start">
         <v-col cols="8" v-for="comment in comments" :key="comment.id">
           <v-card elevation="0">
-            <v-card-title>{{ comment.owner }}</v-card-title>
-            <v-card-text class="black--text">{{ comment.content }}</v-card-text>
+            <v-card-title>{{ comment.writer.username }}</v-card-title>
+            <v-card-text class="black--text">{{ comment.comment }}</v-card-text>
             <v-card-text>
               <div style="font-size: 12px">
                 <v-icon color="#A6A6A6">mdi-clock</v-icon>
-                <span style="color: #a6a6a6"> {{ comment.created_at }}</span
+                <span style="color: #a6a6a6"> {{ comment.created }}</span
                 >&nbsp;&nbsp;&nbsp;&nbsp;
                 <v-icon color="secondary">mdi-fire</v-icon>
-                <span style="color: #d4525d">{{ comment.like }}</span>
+                <span style="color: #d4525d">{{ comment.commentlike_n }}</span>
               </div>
             </v-card-text>
-
-            <v-card
+            <!-- <v-card
               color="#F5F6F8"
               class="pl-8"
               elevation="0"
@@ -157,7 +166,7 @@
                   <span style="color: #d4525d">{{ reply.like }}</span>
                 </div>
               </v-card-text>
-            </v-card>
+            </v-card> -->
           </v-card>
         </v-col>
       </v-row>
@@ -170,19 +179,31 @@ import api from '@/api/modules/post'
 
 export default {
   data: () => ({
-    category: '',
+    app: '',
     post: {},
+    comments: [],
+    createComment: {
+      'post': 0,
+      'parent_comment': null,
+      'comment': '',
+      'secret': false
+    },
     hotposts: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
   }),
 
   created () {
-    this.category = this.$route.path.split('/')[1]
-    api.getPostDetail(this, this.category, this.$route.params.postId)
+    this.app = this.$route.path.split('/')[1]
+    api.getPostDetail(this, this.app, this.$route.params.postId)
   },
 
   methods: {
     connected () {
-      api.setPitapatConnected(this, this.category, this.$route.params.postId)
+      api.setPitapatConnected(this, this.app, this.$route.params.postId)
+    },
+
+    writeComment () {
+      this.createComment.post = this.post.id
+      api.writeComment(this.createComment, this, this.app)
     }
   }
 }

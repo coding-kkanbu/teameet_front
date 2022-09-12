@@ -32,27 +32,27 @@ export default {
       })
   },
 
-  getAllPostsByCategory (category, page) {
+  getAllPostsByCategory (slug, page) {
     myAxios
-      .get(Urls.category_PostsByPage(category, page))
+      .get(Urls.category_PostsByPage(slug, page))
       .then(response => {
         postStore.state.totalPages = Math.ceil(response.data.count / 10)
         postStore.state.allPostsBycategory = response.data.results
       })
   },
 
-  getPostDetail (component, category, id) {
+  getPostDetail (component, app, id) {
     myAxios
-      .get(Urls.post_Detail(category, id))
+      .get(Urls.post_Detail(app, id))
       .then(response => {
         component.post = response.data
-        // this.getPostComments(component, id)
+        this.getPostComments(component, app, id)
       })
   },
 
-  getPostComments (component, id) {
+  getPostComments (component, app, id) {
     myAxios
-      .get(Urls.uniquePost(id))
+      .get(Urls.post_Comments(app, id))
       .then(response => {
         component.comments = response.data
       })
@@ -66,6 +66,15 @@ export default {
           name: app + 'Detail',
           params: { 'subtopic': response.data.category_set.slug, 'postId': response.data.id }
         })
+      })
+  },
+
+  writeComment (postData, component, app) {
+    myAxios
+      .post(Urls.comment, postData)
+      .then(response => {
+        this.getPostComments(component, app, postData.post)
+        component.createComment.comment = ''
       })
   },
 

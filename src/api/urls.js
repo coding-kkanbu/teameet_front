@@ -37,18 +37,18 @@ export default {
   },
 
   /* Post */
-  post_Detail: (category, id) => {
-    return `${category}/${id}/`
+  post_Detail: (app, id) => {
+    return `${app}/${id}/`
   },
   post_Write: (app) => {
     return `${app}/`
   },
+  post_Comments: (app, id) => {
+    return `${app}/${id}/get_comments/`
+  },
 
   /* Topic */
   topic: 'topic/',
-  topic_Comments: (id) => {
-    return `topic/${id}/get_comments`
-  },
   topic_Blame: (id) => {
     return `topic/${id}/toggle_postblame/`
   },
@@ -61,9 +61,6 @@ export default {
   pitapat_Connected: (id) => {
     return `pitapat/${id}/connected/`
   },
-  pitapat_Comments: (id) => {
-    return `pitapat/${id}/get_comments`
-  },
   pitapat_Blame: (id) => {
     return `pitapat/${id}/toggle_postblame/`
   },
@@ -72,7 +69,7 @@ export default {
   },
 
   /* Comment */
-  comment_All: 'comment/',
+  comment: 'comment/',
   comment_Specific: (id) => {
     return `comment/${id}/`
   },
