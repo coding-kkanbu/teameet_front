@@ -4,78 +4,82 @@
       app
       color="#FFFFFF"
       flat
-      style="border-bottom: 1px solid #d2d2d2 !important"
+      style="border-bottom: 1px solid #d2d2d2 !important;"
     >
-      <a href="/">
-        <img class="ml-4" src="@/assets/tm_img/tm_logo.png" width="100"
-      /></a>
+      <div class="align-center d-flex justify-space-between" style="margin:auto; width: 986px;">
+        <a href="/">
+          <img class="ml-4" src="@/assets/tm_img/tm_logo.png" width="100"
+        /></a>
+      <div class="d-md-flex d-none mx-auto">
+          <v-tabs centered class="pl-n12 black--text" color="primary">
+            <v-tabs-slider></v-tabs-slider>
+            <v-tab
+              class="black--text"
+              v-for="menu in menus"
+              :key="menu.name"
+              :to="menu.url"
+              >{{ menu.name }}</v-tab
+            >
+          </v-tabs>
+        </div>
 
-      <v-tabs centered class="pl-n12 black--text" color="primary">
-        <v-tabs-slider></v-tabs-slider>
-        <v-tab
-          class="black--text"
-          v-for="menu in menus"
-          :key="menu.name"
-          :to="menu.url"
-          >{{ menu.name }}</v-tab
-        >
-      </v-tabs>
+        <div class="d-flex align-center">
+          <v-responsive max-width="220">
+            <v-text-field
+              class="search_box"
+              hide-details
+              dense
+              filled
+              rounded
+              color="#F5F6F8"
+              style="font-size: 0.9rem;"
+              placeholder="검색어를 입력하세요"
+            >
+              <v-icon slot="append" color="primary">mdi-magnify</v-icon>
+            </v-text-field>
+          </v-responsive>
 
-      <v-spacer></v-spacer>
+          <v-badge
+            :content="notifications"
+            :value="notifications"
+            color="secondary"
+            overlap
+          >
+            <v-icon dense color="black" class="pl-5">mdi-bell</v-icon>
+          </v-badge>
 
-      <v-responsive max-width="240">
-        <v-text-field
-          class="search_box"
-          hide-details
-          dense
-          filled
-          rounded
-          color="#F5F6F8"
-          placeholder="검색어를 입력하세요"
-        >
-          <v-icon slot="append" color="primary">mdi-magnify</v-icon>
-        </v-text-field>
-      </v-responsive>
+          <v-menu offset-y left bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn text class="pl-3" v-bind="attrs" v-on="on">
+                <v-icon dense color="black"> mdi-account</v-icon>
+                <span style="color: black; font-weight: bold">
+                  {{ user.username }}
+                </span>
+              </v-btn>
+            </template>
 
-      <v-badge
-        :content="notifications"
-        :value="notifications"
-        color="secondary"
-        overlap
-      >
-        <v-icon color="black" class="pl-5">mdi-bell</v-icon>
-      </v-badge>
+            <v-list style="text-align: center">
+              <template v-if="!isLogin">
+                <v-list-item @click="dialogOpen('register')">
+                  <v-list-item-title>회원가입</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="dialogOpen('login')">
+                  <v-list-item-title>로그인</v-list-item-title>
+                </v-list-item>
+              </template>
 
-      <v-menu offset-y left bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn text class="pl-3" v-bind="attrs" v-on="on">
-            <v-icon color="black"> mdi-account</v-icon>
-            <span style="color: black; font-weight: bold">
-              {{ user.username }}
-            </span>
-          </v-btn>
-        </template>
-
-        <v-list style="text-align: center">
-          <template v-if="!isLogin">
-            <v-list-item @click="dialogOpen('register')">
-              <v-list-item-title>회원가입</v-list-item-title>
-            </v-list-item>
-            <v-list-item @click="dialogOpen('login')">
-              <v-list-item-title>로그인</v-list-item-title>
-            </v-list-item>
-          </template>
-
-          <template v-else>
-            <v-list-item>
-              <v-list-item-title @click="logout">로그아웃</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <router-link to="/mypage/profile">My Page</router-link>
-            </v-list-item>
-          </template>
-        </v-list>
-      </v-menu>
+              <template v-else>
+                <v-list-item>
+                  <v-list-item-title @click="logout">로그아웃</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <router-link to="/mypage/profile">My Page</router-link>
+                </v-list-item>
+              </template>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
     </v-app-bar>
     <Register/> <LogIn />
   </div>
