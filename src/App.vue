@@ -4,7 +4,7 @@
     <AppBar />
 
     <v-main  style="background:#F3F5F8" class="pt-10">
-      <v-container style="background:#FFF; max-width:986px;">
+      <v-container class="pb-10" style="background:#FFF; max-width:986px;">
         <v-row>
           <v-col class="col-12">
             <router-view />

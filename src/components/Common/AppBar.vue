@@ -7,9 +7,13 @@
       style="border-bottom: 1px solid #d2d2d2 !important;"
     >
       <div class="align-center d-flex justify-space-between" style="margin:auto; width: 986px;">
+        <!-- 00 드로워 메뉴 -->
+        <v-app-bar-nav-icon class="d-flex d-md-none" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <!-- 01 로고 -->
         <a href="/">
           <img class="ml-4" src="@/assets/tm_img/tm_logo.png" width="100"
         /></a>
+        <!-- 02 일반 메뉴 -->
       <div class="d-md-flex d-none mx-auto">
           <v-tabs centered class="pl-n12 black--text" color="primary">
             <v-tabs-slider></v-tabs-slider>
@@ -22,11 +26,11 @@
             >
           </v-tabs>
         </div>
-
         <div class="d-flex align-center">
+          <!-- 03 검색바 -->
           <v-responsive max-width="220">
             <v-text-field
-              class="search_box"
+              class="d-md-flex d-none search_box"
               hide-details
               dense
               filled
@@ -39,6 +43,7 @@
             </v-text-field>
           </v-responsive>
 
+          <!-- 03 알림 -->
           <v-badge
             :content="notifications"
             :value="notifications"
@@ -82,6 +87,32 @@
       </div>
     </v-app-bar>
     <Register/> <LogIn />
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      left
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-gray--text text--accent-4"
+        >
+
+          <v-list-item
+            v-for="menu in menus"
+            :key="menu.name"
+            :to="menu.url"
+            >
+            <v-list-item-title>{{ menu.name }}</v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -100,7 +131,9 @@ export default {
       { name: '토픽', url: { name: 'topicSubtopic', params: {subtopic: 'afterpitapat'} } },
       { name: '두근두근', url: { name: 'pitapatSubtopic', params: {subtopic: 'hot'} } }
     ],
-    notifications: 1
+    notifications: 1,
+    drawer: false,
+    group: null
   }),
 
   computed: {
@@ -111,6 +144,12 @@ export default {
     ...mapMutations('userStore', ['dialogOpen']),
     logout () {
       api.logout()
+    }
+  },
+
+  watch: {
+    group () {
+      this.drawer = false
     }
   }
 }

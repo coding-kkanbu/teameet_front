@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-dialog v-model="dialog.login" width="553" height="600">
-      <v-card class="pa-6" color="#FFFFFF">
-        <v-toolbar cards flat class="my-6">
-          <img class="mx-auto" src="@/assets/tm_img/tm_shy.png" width="200" />
+    <v-dialog v-model="dialog.login" width="480" height="600">
+      <v-card class="pa-3" color="#FFFFFF">
+        <v-toolbar cards flat class="my-1">
+          <img class="mx-auto" src="@/assets/tm_img/tm_shy.png" width="100" />
         </v-toolbar>
-        <v-form ref="loginForm" class="pa-3 pt-6">
+        <v-form ref="loginForm" class="pa-1 pt-2">
           <v-text-field
             v-model="email"
             name="email"
@@ -27,7 +27,7 @@
                 <template v-slot:label>로그인을 유지합니다.</template>
               </v-checkbox>
             </v-col>
-            <v-col class="text-right">
+            <v-col class="text-right" style="font-size:0.9rem">
               <a href="#">이메일, 비밀번호를 잊으셨나요? </a>
             </v-col>
           </v-row>
@@ -44,6 +44,18 @@
             로그인
           </v-btn>
         </v-card-actions>
+        <div
+            class="primary--text py-3"
+            style="
+              font-size:0.9rem;
+              text-align:center;"
+            >
+            또는 다음 계정으로 로그인
+        </div>
+        <div class="d-flex justify-space-between pa-2">
+          <img style="width:48%;" src="/static/google.svg">
+          <img style="width:48%;" src="/static/kakao.svg">
+        </div>
       </v-card>
     </v-dialog>
   </div>
