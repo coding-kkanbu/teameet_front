@@ -51,14 +51,14 @@
           <v-btn text class="pl-3" v-bind="attrs" v-on="on">
             <v-icon color="black"> mdi-account</v-icon>
             <span style="color: black; font-weight: bold">
-              {{ me.username }}
+              {{ user.username }}
             </span>
           </v-btn>
         </template>
 
         <v-list style="text-align: center">
-          <template v-if="!loginState.isLogin">
-            <v-list-item>
+          <template v-if="!isLogin">
+            <v-list-item @click="dialogOpen('register')">
               <v-list-item-title>회원가입</v-list-item-title>
             </v-list-item>
             <v-list-item @click="dialogOpen('login')">
@@ -77,33 +77,37 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-    <LogIn />
+    <Register/> <LogIn />
   </div>
 </template>
 
 <script>
-import LogIn from '@/components/LogIn.vue'
-import { mapState, mapMutations, mapActions } from 'vuex'
+import Register from '@/components/Common/Register.vue'
+import LogIn from '@/components/Common/LogIn.vue'
+import { mapState, mapMutations } from 'vuex'
+import api from '@/api/modules/accounts'
 
 export default {
-  components: { LogIn },
+  components: { Register, LogIn },
 
   data: () => ({
     menus: [
-      { name: 'Home', url: '/' },
-      { name: '토픽', url: '/topic/afterpitapat' },
-      { name: '두근두근', url: '/pitapat' }
+      { name: 'Home', url: {name: 'home'} },
+      { name: '토픽', url: { name: 'topicSubtopic', params: {subtopic: 'afterpitapat'} } },
+      { name: '두근두근', url: { name: 'pitapatSubtopic', params: {subtopic: 'hot'} } }
     ],
     notifications: 1
   }),
 
   computed: {
-    ...mapState('userStore', ['loginState', 'me'])
+    ...mapState('userStore', ['isLogin', 'user'])
   },
 
   methods: {
     ...mapMutations('userStore', ['dialogOpen']),
-    ...mapActions('userStore', ['logout'])
+    logout () {
+      api.logout()
+    }
   }
 }
 </script>

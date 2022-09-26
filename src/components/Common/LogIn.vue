@@ -5,14 +5,16 @@
         <v-toolbar cards flat class="my-6">
           <img class="mx-auto" src="@/assets/tm_img/tm_shy.png" width="200" />
         </v-toolbar>
-        <v-form id="login-form" ref="loginForm" class="pa-3 pt-6">
+        <v-form ref="loginForm" class="pa-3 pt-6">
           <v-text-field
+            v-model="email"
             name="email"
             label="이메일"
             outlined
             color="primary"
           ></v-text-field>
           <v-text-field
+            v-model="password"
             name="password"
             label="비밀번호"
             outlined
@@ -31,7 +33,14 @@
           </v-row>
         </v-form>
         <v-card-actions>
-          <v-btn block large color="primary" depressed @click="save">
+          <v-btn
+            block
+            x-large
+            height="60"
+            color="primary"
+            depressed
+            @click="save"
+          >
             로그인
           </v-btn>
         </v-card-actions>
@@ -41,18 +50,20 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
+import api from '@/api/modules/accounts'
 
 export default {
+  data: () => ({
+    email: '',
+    password: ''
+  }),
   computed: {
-    ...mapState('userStore', ['dialog', 'loginState', 'me'])
+    ...mapState('userStore', ['dialog', 'isLogin', 'user'])
   },
   methods: {
-    ...mapActions('userStore', ['login']),
     save () {
-      console.log('save()...')
-      const postData = new FormData(document.getElementById('login-form'))
-      this.login(postData)
+      api.login({ email: this.email, password: this.password })
       this.$refs.loginForm.reset()
     }
   }

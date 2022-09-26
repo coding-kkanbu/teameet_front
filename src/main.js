@@ -8,16 +8,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   vuetify,
   el: '#inspire',
   router,
   store,
-  beforeCreate () {
-    // this.$store.dispatch('userStore/getUserInfo')
-    this.$store.commit('userStore/loginSuccess')
-  },
   components: { App },
   template: '<App/>'
 }).$mount('#inspire')

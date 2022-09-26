@@ -1,6 +1,16 @@
 <template>
   <div>
-    <v-container v-for="post in posts" :key="post.id">
+    <v-container
+      v-for="post in posts"
+      :key="post.id"
+      :to="{
+        name: post.category_set.app + 'Detail',
+        params: {
+          subtopic: post.category_set.slug,
+          postId: post.id,
+        },
+      }"
+    >
       <v-row class="ml-10 mt-8">
         <v-col cols="1" class="mr-5">
           <v-avatar class="profile" color="grey" size="50">
@@ -15,21 +25,25 @@
             justify="start"
             style="color: #a6a6a6; font-size: 12px"
           >
-            {{ post.category }}
+            <!-- {{ post.category_set.name }} -->
           </v-row>
           <v-row>
             <v-col cols="9" class="px-0">{{ post.title.substr(0, 40) }}</v-col>
-            <v-col cols="3" class="text-right pr-0" style="color: #a6a6a6; font-size: 12px">
+            <v-col
+              cols="3"
+              class="text-right pr-0"
+              style="color: #a6a6a6; font-size: 12px"
+            >
               <v-icon dense size="14" color="#A6A6A6">mdi-eye</v-icon>
               {{ post.hit }}
               <v-icon dense size="14" color="#A6A6A6" class="ml-2"
                 >mdi-fire</v-icon
               >
-              {{ post.like }}
+              {{ post.postlike_n }}
               <v-icon dense size="14" color="#A6A6A6" class="ml-2">
                 mdi-message-processing-outline
               </v-icon>
-              {{ post.comment }}
+              {{ post.comment_n }}
             </v-col>
           </v-row>
         </v-col>
@@ -39,37 +53,23 @@
   </div>
 </template>
 <script>
+import postApi from '@/api/modules/post'
+import accountApi from '@/api/modules/accounts'
+
+import { mapState } from 'vuex'
+
 export default {
   data: () => ({
-    posts: [
-      {
-        id: 1,
-        category: '토픽 > 헬스다이어트',
-        title: '따뜻한 남자 좋아하시는 분?',
-        updated_at: '2022.1.17',
-        hit: 900,
-        like: 30,
-        comment: 100
-      },
-      {
-        id: 2,
-        category: '토픽 > 헬스다이어트',
-        title: '따뜻한 남자 좋아하시는 분?',
-        updated_at: '2022.1.17',
-        hit: 900,
-        like: 30,
-        comment: 100
-      },
-      {
-        id: 3,
-        category: '토픽 > 헬스다이어트',
-        title: '따뜻한 남자 좋아하시는 분@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@?',
-        updated_at: '2022.1.17',
-        hit: 900,
-        like: 30,
-        comment: 100
-      }
-    ]
-  })
+    posts: []
+  }),
+
+  computed: {
+    ...mapState('userStore', ['user'])
+  },
+
+  async created () {
+    await accountApi.getMyDetail()
+    postApi.getPostsByUser(this, this.user.username)
+  }
 }
 </script>

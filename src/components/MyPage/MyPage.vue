@@ -33,8 +33,7 @@ export default {
     categories: [
       { name: '프로필', route: 'profile' },
       { name: '내가 쓴 글', route: 'posts' },
-      { name: '내 알림', route: 'notifications' },
-      { name: '채팅', route: 'chatting' }
+      { name: '내 알림', route: 'notifications' }
     ]
   })
 }
