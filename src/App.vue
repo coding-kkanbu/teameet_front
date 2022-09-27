@@ -3,10 +3,10 @@
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <AppBar />
 
-    <v-main class="pt-10">
-      <v-container class="#E5E5E5">
+    <v-main  style="background:#F3F5F8" class="pt-10">
+      <v-container class="pb-10" style="background:#FFF; max-width:986px;">
         <v-row>
-          <v-col class="col-12 col-md-10" offset-md="1">
+          <v-col class="col-12">
             <router-view />
           </v-col>
         </v-row>

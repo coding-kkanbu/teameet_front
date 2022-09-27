@@ -2,7 +2,7 @@
   <div class="pt-5">
     <v-container>
       <v-row>
-        <v-col cols="8">
+        <v-col cols="12">
           <v-row align="start" justify="start">
             <v-card elevation="0" width="100%">
               <v-card-subtitle class="primary--text font-weight-bold">
@@ -23,7 +23,7 @@
               <v-card-text color="#A6A6A6">
                 <v-row align="end">
                   <v-col>
-                    {{ post.writer.username }}<br />
+                    <div class="pb-2">{{ post.writer.username }}</div>
                     <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
                     &nbsp;&nbsp;{{ post.created }}&nbsp;
                     <v-icon dense color="#A6A6A6">mdi-eye</v-icon>
@@ -68,6 +68,7 @@
           </v-row>
         </v-col>
 
+        <!--
         <v-col cols="4">
           <v-card outlined>
             <v-card-title class="primary--text font-weight-bold">
@@ -111,10 +112,11 @@
 
           <v-card class="mt-3" outlined> image </v-card>
         </v-col>
+      -->
       </v-row>
 
       <v-row align="start" justify="start">
-        <v-col cols="6">
+        <v-col cols="10">
           <v-textarea
             v-model="createComment.comment"
             outlined
@@ -130,20 +132,20 @@
       </v-row>
 
       <v-row align="start" justify="start">
-        <v-col cols="8" v-for="comment in comments" :key="comment.id">
+        <v-col cols="12" v-for="comment in comments" :key="comment.id">
           <v-card elevation="0">
             <v-card-title>{{ comment.writer.username }}</v-card-title>
             <v-card-text class="black--text">{{ comment.comment }}</v-card-text>
             <v-card-text>
               <div style="font-size: 12px">
-                <v-icon color="#A6A6A6">mdi-clock</v-icon>
+                <v-icon dense color="#A6A6A6">mdi-clock</v-icon>
                 <span style="color: #a6a6a6"> {{ comment.created }}</span
                 >&nbsp;&nbsp;&nbsp;&nbsp;
-                <v-icon color="secondary">mdi-fire</v-icon>
+                <v-icon dense color="secondary">mdi-fire</v-icon>
                 <span style="color: #d4525d">{{ comment.commentlike_n }}</span>
               </div>
             </v-card-text>
-            <!-- <v-card
+            <v-card
               color="#F5F6F8"
               class="pl-8"
               elevation="0"
@@ -166,7 +168,7 @@
                   <span style="color: #d4525d">{{ reply.like }}</span>
                 </div>
               </v-card-text>
-            </v-card> -->
+            </v-card>
           </v-card>
         </v-col>
       </v-row>
