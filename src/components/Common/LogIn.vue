@@ -23,7 +23,7 @@
           ></v-text-field>
           <v-row align="center" justify="center">
             <v-col>
-              <v-checkbox color="secondary">
+              <v-checkbox color="secondary" v-model="remember">
                 <template v-slot:label>로그인을 유지합니다.</template>
               </v-checkbox>
             </v-col>
@@ -68,14 +68,15 @@ import api from '@/api/modules/accounts'
 export default {
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    remember: false
   }),
   computed: {
     ...mapState('userStore', ['dialog', 'isLogin', 'user'])
   },
   methods: {
     save () {
-      api.login({ email: this.email, password: this.password })
+      api.login({ email: this.email, password: this.password }, this.remember)
       this.$refs.loginForm.reset()
     }
   }
