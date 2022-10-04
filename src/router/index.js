@@ -13,6 +13,7 @@ import PitAPat from '@/components/PitAPat/PitAPat.vue'
 import MyPage from '@/components/MyPage/MyPage.vue'
 import Profile from '@/components/MyPage/Profile.vue'
 import MyPosts from '@/components/MyPage/MyPosts.vue'
+import Notifications from '@/components/MyPage/Notifications.vue'
 
 import NotFound from '@/components/Error/NotFound.vue'
 
@@ -22,9 +23,16 @@ export default new Router({
   mode: 'history',
   routes: [
     { path: '/', component: MainHome, name: 'home' },
+
     {
-      path: '/:pathMatch(.*)*',
+      path: '*',
       redirect: '/404'
+    },
+
+    {
+      path: '/404',
+      name: 'notFound',
+      component: NotFound
     },
 
     {
@@ -84,14 +92,10 @@ export default new Router({
       props: true,
       children: [
         { path: 'profile', component: Profile },
-        { path: 'posts', component: MyPosts }
+        { path: 'posts', component: MyPosts },
+        { path: 'notifications', component: Notifications }
       ]
-    },
-
-    {
-      path: '/404',
-      name: 'notFound',
-      component: NotFound
     }
+
   ]
 })

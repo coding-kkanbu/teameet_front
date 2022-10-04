@@ -35,7 +35,7 @@ function setInterceptors (instance) {
           accountsApi.refreshToken()
         } else {
           accountsApi.logout()
-          console.logt('토큰 만료, 재로그인 필요')
+          console.log('토큰 만료, 재로그인 필요')
           userStore.commit('dialogOpen', 'login')
         }
       } else if (error.response.status === 400) {
