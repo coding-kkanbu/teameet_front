@@ -8,16 +8,17 @@ export default {
     myAxios
       .post(Urls.accounts_Register, postData)
       .then(response => {
+        store.commit('userStore/dialogClose', 'register')
         store.commit('userStore/dialogOpen', 'login')
       })
   },
 
-  login (postData) {
+  login (postData, remember) {
     myAxios
       .post(Urls.accounts_Login, postData)
       .then(response => {
         localStorage.setItem('access_token', response.data['access_token'])
-        localStorage.setItem('refresh_token', response.data['refresh_token'])
+        if (remember) localStorage.setItem('refresh_token', response.data['refresh_token'])
         this.getMyDetail()
       })
   },
@@ -27,13 +28,14 @@ export default {
       .post(Urls.accounts_Logout)
       .then(response => {
         localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
         alert(`${userStore.state.user.username}님이 로그아웃 하셨습니다.`)
         store.commit('userStore/logoutSuccess', response.data)
       })
   },
 
-  refreshToken () {
-    myAxios
+  async refreshToken () {
+    await myAxios
       .post(Urls.accounts_TokenRefresh, {'refresh': localStorage.getItem('refresh_token')})
       .then(response => {
         localStorage.setItem('access_token', response.data['access'])

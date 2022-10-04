@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import api from '@/api/modules/accounts'
+import accountsApi from '@/api/modules/accounts'
 import postApi from '@/api/modules/post'
 import AppBar from '@/components/Common/AppBar.vue'
 
@@ -25,7 +25,8 @@ export default {
   components: { AppBar },
 
   async created () {
-    api.getMyDetail()
+    if (localStorage.getItem('refresh_token')) await accountsApi.refreshToken()
+    accountsApi.getMyDetail()
     await postApi.getTopicCategories()
   }
 }
