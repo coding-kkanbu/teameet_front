@@ -31,7 +31,7 @@
                 <h5>랜덤 닉네임</h5>
                 <h5 class="mt-3">가입한 날짜</h5>
                 <h5 class="mt-3">작성한 글</h5>
-                <h5 class="mt-3">인증 여부</h5>
+                <h5 class="mt-3">나이스 인증</h5>
               </v-col>
               <v-col style="color: #a6a6a6">
                 <h5>{{ user.random_name }}</h5>

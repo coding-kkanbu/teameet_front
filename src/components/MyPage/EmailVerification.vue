@@ -10,9 +10,10 @@
             v-model="email"
             name="email"
             :rules="emailRules"
-            label="이메일"
+            label="나이스 이메일 주소를 입력하세요."
             outlined
             color="primary"
+            class="mt-2"
           ></v-text-field>
         </v-form>
         <v-card-actions class="px-2">
