@@ -52,7 +52,7 @@
             >
             또는 다음 계정으로 로그인
         </div>
-        <v-row dense class="my-2">
+        <v-row dense class="my-2 text-center">
           <v-col cols="6">
             <v-btn @click="google" text width="80" class="ma-0 pa-0">
               <img style="width: 85%" src="/static/google.svg" />

@@ -80,9 +80,16 @@ export default {
     myAxios
       .post(Urls.accounts_EmailVerification, email)
       .then(response => {
-        console.log(response)
         component.$refs.form.reset()
         component.dialog.email = false
+      })
+  },
+
+  confirmVerifyEmail (uid, token) {
+    myAxios
+      .get(Urls.accounts_EmailVerification_confirm(uid, token))
+      .then(response => {
+        router.push({name: 'myprofile'})
       })
   },
 
