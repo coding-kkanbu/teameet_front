@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import MainHome from '@/components/Common/MainHome.vue'
 import Social from '@/components/Common/Social.vue'
+import VerifyNeisEmail from '@/components/Common/VerifyNeisEmail.vue'
 
 import SubTopic from '@/components/Post/SubTopic.vue'
 import PostDetail from '@/components/Post/Detail.vue'
@@ -32,6 +33,11 @@ export default new Router({
           component: Social
         }
       ]
+    },
+
+    {
+      path: '/verifyneis',
+      component: VerifyNeisEmail
     },
 
     {
@@ -90,7 +96,7 @@ export default new Router({
       name: 'mypage',
       props: true,
       children: [
-        { path: 'profile', component: Profile },
+        { path: 'profile', component: Profile, name: 'myprofile' },
         { path: 'posts', component: MyPosts }
       ]
     }

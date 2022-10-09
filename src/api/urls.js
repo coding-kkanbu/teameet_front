@@ -10,6 +10,9 @@ export default {
   accounts_Logout: 'accounts/logout/',
   accounts_TokenRefresh: 'accounts/token/refresh/',
   accounts_EmailVerification: 'accounts/verify-neis-email/',
+  accounts_EmailVerification_confirm: (uid, token) => {
+    return `accounts/verify-neis-email/confirm/${uid}/${token}/`
+  },
   accounts_PasswordReset: 'accounts/password-reset/',
   accounts_PasswordChange: 'accounts/password-change/',
 
