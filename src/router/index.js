@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import MainHome from '@/components/Common/MainHome.vue'
+import Social from '@/components/Common/Social.vue'
+
 import SubTopic from '@/components/Post/SubTopic.vue'
 import PostDetail from '@/components/Post/Detail.vue'
 import PostWrite from '@/components/Post/Write.vue'
@@ -20,6 +22,17 @@ export default new Router({
   mode: 'history',
   routes: [
     { path: '/', component: MainHome, name: 'home' },
+
+    {
+      path: '/social',
+      component: Social,
+      children: [
+        {
+          path: ':site',
+          component: Social
+        }
+      ]
+    },
 
     {
       path: '/topic',

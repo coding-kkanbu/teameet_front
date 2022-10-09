@@ -2,6 +2,7 @@ import myAxios from '@/api/AxiosInstanceController'
 import Urls from '@/api/urls'
 import userStore from '@/store/modules/userStore'
 import store from '@/store'
+import router from '../../router'
 
 export default {
   register (postData) {
@@ -100,6 +101,42 @@ export default {
       .then(response => {
         component.$refs.form.reset()
         component.dialog.password = false
+      })
+  },
+
+  google () {
+    myAxios
+      .get(Urls.google)
+      .then(response => {
+        location.replace(response.data.url)
+      })
+  },
+
+  googleFinish (code) {
+    myAxios
+      .post(Urls.google_finish, { 'code': code })
+      .then(response => {
+        localStorage.setItem('access_token', response.data['access_token'])
+        this.getMyDetail()
+        router.push('/')
+      })
+  },
+
+  kakao () {
+    myAxios
+      .get(Urls.kakao)
+      .then(response => {
+        location.replace(response.data.url)
+      })
+  },
+
+  kakaoFinish (code) {
+    myAxios
+      .post(Urls.kakao_finish, { 'code': code })
+      .then(response => {
+        localStorage.setItem('access_token', response.data['access_token'])
+        this.getMyDetail()
+        router.push('/')
       })
   }
 
