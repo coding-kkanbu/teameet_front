@@ -54,6 +54,6 @@ function setInterceptors (instance) {
   return instance
 }
 
-const myAxios = setInterceptors(createAxiosInstance(Urls.Django_API, 1000))
+const myAxios = setInterceptors(createAxiosInstance(Urls.Django_API, 3000))
 
 export default myAxios

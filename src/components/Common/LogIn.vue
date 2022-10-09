@@ -52,10 +52,18 @@
             >
             또는 다음 계정으로 로그인
         </div>
-        <div class="d-flex justify-space-between pa-2">
-          <img style="width:48%;" src="/static/google.svg">
-          <img style="width:48%;" src="/static/kakao.svg">
-        </div>
+        <v-row dense class="my-2">
+          <v-col cols="6">
+            <v-btn @click="google" text width="80" class="ma-0 pa-0">
+              <img style="width: 85%" src="/static/google.svg" />
+            </v-btn>
+          </v-col>
+          <v-col cols="6">
+            <v-btn @click="kakao" text width="80" class="ma-0 pa-0">
+              <img style="width: 85%" src="/static/kakao.svg" />
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-card>
     </v-dialog>
   </div>
@@ -78,6 +86,13 @@ export default {
     save () {
       api.login({ email: this.email, password: this.password }, this.remember)
       this.$refs.loginForm.reset()
+    },
+    google () {
+      api.google()
+    },
+
+    kakao () {
+      api.kakao()
     }
   }
 }

@@ -13,6 +13,12 @@ export default {
   accounts_PasswordReset: 'accounts/password-reset/',
   accounts_PasswordChange: 'accounts/password-change/',
 
+  /* Social Login */
+  google: 'accounts/google/login/',
+  google_finish: 'accounts/google/login/finish/',
+  kakao: 'accounts/kakao/login/',
+  kakao_finish: 'accounts/kakao/login/finish/',
+
   /* Users */
   users: 'users/',
   users_Specific: (username) => {
