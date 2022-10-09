@@ -10,9 +10,9 @@ Vue.config.productionTip = false
 
 new Vue({
   vuetify,
-  el: '#inspire',
+  el: '#app',
   router,
   store,
   components: { App },
   template: '<App/>'
-}).$mount('#inspire')
+}).$mount('#app')

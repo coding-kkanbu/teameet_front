@@ -21,6 +21,13 @@ const userStore = {
         state.dialog.register = true
       }
     },
+    dialogClose (state, kind) {
+      if (kind === 'login') {
+        state.dialog.login = false
+      } else if (kind === 'register') {
+        state.dialog.register = false
+      }
+    },
     loginSuccess (state, userDetail) {
       state.isLogin = true
       state.user = userDetail
